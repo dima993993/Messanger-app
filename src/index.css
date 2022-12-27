@@ -1,13 +1,76 @@
-body {
-  margin: 0;
-  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
-    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
-    sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
+@import url('https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap');
+
+
+:root {
+  /*Typography*/
+  --family: 'Roboto', sans-serif;
+  --fs-xs: 10px;
+  --fs-sm: 12px;
+  --fs-md: 14px;
+  --fs-lg: 18px;
+  --fw-light: 300;
+  --fw-normal: 500;
+  --fw-bold: 700;
+  --fw-black: 900;
+  /* Animation */
+  --tr-fast: 0.2s;
+  --tr-middle: 0.4s;
+  --tr-slow: 0.6s;
+  /* Size Elements*/
+  --width-aside: 250px;
+  --height-header: 60px;
+  --height-elem: 40px;
+  --width-field: 300px;
+  /* Padding */
+  --pd-xs: 5px;
+  --pd-sm: 10px;
+  --pd-md: 20px;
+  --pd-lg: 30px;
+  /* Margin */
+  --mr-xs: 5px;
+  --mr-sm: 10px;
+  --mr-md: 20px;
+  --mr-lg: 30px;
+  --mr-bottom: 20px;
+  /* Border Radius */
+  --radius-item: 8px;
+  --radius-messege: 20px;
+  /* Summa for calc height messege container*/
+  --content-height: calc(
+    100vh - var(--height-header) - var(--height-elem) - var(--mr-bottom) - var(--mr-sm)    
+  );
 }
 
-code {
-  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
-    monospace;
+/* Theme Color */
+
+body[data-theme='dark'] {
+  --color-basic: #212121;
+  --color-aditional: #2C2C2C;
+  --color-text: #ffffff;
+  --color-text-sub: #A2ACB4;
+  --color-icon: #6B6B6B;
+  --color-active: #6c5ce7;
+  --color-your-messege: #9980FA;
+  --color-error: #e74c3c;
+}
+body[data-theme='light'] {
+  --color-basic: #ecf0f1;
+  --color-aditional: #dfe6e9;
+  --color-text: #000000;
+  --color-text-sub: #464646;
+  --color-icon: #393939;
+  --color-active: #74b9ff;
+  --color-your-messege: #EEFFDE;
+  --color-error: #c0392b;
+}
+
+body {
+  font-family: var(--family);
+  font-weight: var(--fw-light);
+  color: var(--color-text);
+  background-color: var(--color-basic);
+}
+.active-link {
+  background-color: var(--color-active);
+  color: blue;
 }
