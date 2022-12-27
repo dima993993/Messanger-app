@@ -33,12 +33,26 @@
   --mr-lg: 30px;
   --mr-bottom: 20px;
   /* Border Radius */
-  --radius-item: 8px;
-  --radius-messege: 20px;
+  --radius-xs: 5px;
+  --radius-sm: 10px;
+  --radius-md: 15px;
+  --radius-lg: 20px;
   /* Summa for calc height messege container*/
   --content-height: calc(
     100vh - var(--height-header) - var(--height-elem) - var(--mr-bottom) - var(--mr-sm)    
   );
+  
+}
+
+/* Media Queries */
+@media (max-width: 960px) {
+    :root {
+      /* Size Elements*/
+      --width-aside: 200px;
+      --height-header: 40px;
+      --height-elem: 30px;
+      --width-field: 200px;
+    }
 }
 
 /* Theme Color */
@@ -52,6 +66,7 @@ body[data-theme='dark'] {
   --color-active: #6c5ce7;
   --color-your-messege: #9980FA;
   --color-error: #e74c3c;
+  
 }
 body[data-theme='light'] {
   --color-basic: #ecf0f1;
@@ -72,5 +87,4 @@ body {
 }
 .active-link {
   background-color: var(--color-active);
-  color: blue;
 }
