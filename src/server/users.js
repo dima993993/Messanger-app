@@ -66,6 +66,23 @@ const users = [
     },
     chats: [],
   },
+  {
+    idUser: 5,
+    authorization: {
+      login: "111",
+      password: "111",
+    },
+    profile: {
+      firstName: "Masha",
+      lastName: "Bakanova",
+      nicName: "Kiss",
+      phone: "+380992345607",
+      photo:
+        "https://www.biletik.aero/upload/medialibrary/807/807f262b60da392f1e09aa6d33f20a9b.png",
+      aboutMe: "lorem lorem lorem lorem lorem lorem",
+    },
+    chats: [],
+  },
 ];
 
 export default users;

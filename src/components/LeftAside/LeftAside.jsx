@@ -25,28 +25,38 @@ const DialogsContainer = styled.div`
 `;
 
 const LeftAsideComponent = (props) => {
-  console.log(props.authorizedUser);
+  // console.log(props.authorizedUser[0].chats);
+  let changeDialogs;
+  if (props.authorizedUser.length > 0) {
+    changeDialogs = props.authorizedUser[0].chats.map((chat) =>
+      props.dialogs.filter((dialog) => dialog.idDialog === chat)
+    );
+  }
+
   return (
     <LeftAsideWrapper>
       {props.authorizedUser.length > 0 ? (
         <>
           <HeaderLeftAside />
           <DialogsContainer>
-            {props.dialogs.map((dialog, index) => {
-              let objUsers = Object.keys(dialog.userInfo);
+            {changeDialogs.map((dialog, index) => {
+              let objUsers = Object.keys(dialog[0].userInfo);
               let rules =
-                objUsers[0] === props.authorizedUser[0].idUser
-                  ? objUsers[0]
-                  : objUsers[1];
-              console.log(rules);
-
+                +objUsers[0] === props.authorizedUser[0].idUser
+                  ? objUsers[1]
+                  : objUsers[0];
+              console.log(objUsers);
               return (
                 <Dialog
                   key={index}
-                  dialog={dialog}
+                  dialog={dialog[0]}
                   chooseCurrentDialog={props.chooseCurrentDialog}
-                  userInfo={dialog.userInfo[rules]}
-                  date={dialog.date.getHours() + ":" + dialog.date.getMinutes()}
+                  userInfo={dialog[0].userInfo[rules]}
+                  date={
+                    dialog[0].date.getHours() +
+                    ":" +
+                    dialog[0].date.getMinutes()
+                  }
                 />
               );
             })}
