@@ -2,11 +2,7 @@ import { connect } from "react-redux";
 import Dialog from "./Dialog";
 import HeaderLeftAside from "./HeaderLeftAside";
 import styled from "styled-components";
-import {
-  chooseCurrentDialog,
-  chooseCurrentDialogUser,
-} from "../../redux/dialogsReducer";
-let dialogs = ["123", "456", "789"];
+import { chooseCurrentDialog } from "../../redux/dialogsReducer";
 
 const LeftAsideWrapper = styled.div`
   background-color: var(--color-basic);
@@ -29,14 +25,36 @@ const DialogsContainer = styled.div`
 `;
 
 const LeftAsideComponent = (props) => {
+  console.log(props.authorizedUser);
   return (
     <LeftAsideWrapper>
-      <HeaderLeftAside />
-      <DialogsContainer>
-        {dialogs.map((dialog, index) => {
-          return <Dialog key={index} dialog={dialog} />;
-        })}
-      </DialogsContainer>
+      {props.authorizedUser.length > 0 ? (
+        <>
+          <HeaderLeftAside />
+          <DialogsContainer>
+            {props.dialogs.map((dialog, index) => {
+              let objUsers = Object.keys(dialog.userInfo);
+              let rules =
+                objUsers[0] === props.authorizedUser[0].idUser
+                  ? objUsers[0]
+                  : objUsers[1];
+              console.log(rules);
+
+              return (
+                <Dialog
+                  key={index}
+                  dialog={dialog}
+                  chooseCurrentDialog={props.chooseCurrentDialog}
+                  userInfo={dialog.userInfo[rules]}
+                  date={dialog.date.getHours() + ":" + dialog.date.getMinutes()}
+                />
+              );
+            })}
+          </DialogsContainer>
+        </>
+      ) : (
+        <div></div>
+      )}
     </LeftAsideWrapper>
   );
 };
@@ -44,13 +62,10 @@ const LeftAsideComponent = (props) => {
 const mapStateToProps = (state) => {
   return {
     dialogs: state.dialogsReducer.dialogs,
-    messages: state.messagesReducer.messages,
-    authorizationUser: state.usersReducer.authorizationUser,
-    currentDialogUser: state.dialogsReducer.currentDialogUser,
+    authorizedUser: state.usersReducer.authorizedUser,
   };
 };
 
 export const LeftAside = connect(mapStateToProps, {
   chooseCurrentDialog,
-  chooseCurrentDialogUser,
 })(LeftAsideComponent);

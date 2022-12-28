@@ -1,9 +1,5 @@
-import { useEffect } from "react";
 import { connect } from "react-redux";
-import {
-  chooseCurrentDialog,
-  chooseCurrentDialogUser,
-} from "../../redux/dialogsReducer";
+import { chooseCurrentDialog } from "../../redux/dialogsReducer";
 import EnterMessege from "./EnterMessage";
 import HeaderContent from "./HeaderContent";
 import MessagesContainer from "./Messages/MessagesContainer";
@@ -32,11 +28,9 @@ const mapStateToProps = (state) => {
     dialogs: state.dialogsReducer.dialogs,
     currentDialog: state.dialogsReducer.currentDialog,
     messages: state.messagesReducer.messages,
-    currentDialogUser: state.dialogsReducer.currentDialogUser,
   };
 };
 
 export const Content = connect(mapStateToProps, {
   chooseCurrentDialog,
-  chooseCurrentDialogUser,
 })(ContentComponent);

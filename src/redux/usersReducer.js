@@ -4,7 +4,7 @@ const USER_AUTHORIZATION = "USER_AUTHORIZATION";
 
 const initialState = {
   users: users,
-  authorizedUser: null,
+  authorizedUser: [],
 };
 
 const usersReducer = (state = initialState, action) => {

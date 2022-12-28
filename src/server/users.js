@@ -14,6 +14,7 @@ const users = [
         "https://images.unsplash.com/photo-1566275529824-cca6d008f3da?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxzZWFyY2h8NXx8cGhvdG98ZW58MHx8MHx8&w=1000&q=80",
       aboutMe: "qwerty qwerty qwerty",
     },
+    chats: [1001, 1002],
   },
   {
     idUser: 2,
@@ -30,6 +31,7 @@ const users = [
         "https://play-lh.googleusercontent.com/zg-BpJxDelX2-C6GxWOrdYwmrM8ekYwdHXNo4INck2C66kzDsJRhm3ggz6b-y7EWOQ",
       aboutMe: "lorem lorem lorem lorem lorem lorem",
     },
+    chats: [1001],
   },
   {
     idUser: 3,
@@ -45,6 +47,7 @@ const users = [
       photo: "",
       aboutMe: "01010101010101010101",
     },
+    chats: [1002],
   },
   {
     idUser: 4,
@@ -61,6 +64,7 @@ const users = [
         "https://www.paperlessmovement.com/wp-content/uploads/2019/09/o2dvsv2pnhe.jpg",
       aboutMe: "lorem lorem lorem lorem lorem lorem",
     },
+    chats: [],
   },
 ];
 

@@ -40,12 +40,6 @@ const WrapperAuthorized = styled.div`
 const AuthorizationComponent = (props) => {
   let login = useField("", { isEmpty: true, minLength: 9, maxLength: 13 });
   let password = useField("", { isEmpty: true, minLength: 6, maxLength: 10 });
-  let navigate = useNavigate();
-  useEffect(() => {
-    if (props.authorizedUser) {
-      navigate("/");
-    }
-  }, []);
 
   return (
     <WrapperAuthorized>

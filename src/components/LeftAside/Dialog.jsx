@@ -34,6 +34,7 @@ const DialogWrapper = styled.div`
 `;
 
 const Dialog = ({ dialog, userInfo, date, chooseCurrentDialog }) => {
+  console.log(userInfo);
   return (
     <DialogWrapper>
       <NavLink
@@ -43,16 +44,16 @@ const Dialog = ({ dialog, userInfo, date, chooseCurrentDialog }) => {
       >
         <div className="photo">
           <UserPhoto
-            photo={null}
-            firstName={"firstName"}
-            lastName={"lastName"}
+            photo={userInfo.photo}
+            firstName={userInfo.firstName}
+            lastName={userInfo.lastName}
           />
         </div>
         <div className="name_block">
-          <div>{dialog}</div>
-          <div>{dialog}</div>
+          <div>{userInfo.firstName + " " + userInfo.lastName}</div>
+          <div>{dialog.lastMessage}</div>
         </div>
-        <div className="date">Date</div>
+        <div className="date">{date}</div>
       </NavLink>
     </DialogWrapper>
   );
