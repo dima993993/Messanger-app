@@ -44,16 +44,7 @@
   
 }
 
-/* Media Queries */
-@media (max-width: 960px) {
-    :root {
-      /* Size Elements*/
-      --width-aside: 200px;
-      --height-header: 40px;
-      --height-elem: 30px;
-      --width-field: 200px;
-    }
-}
+
 
 /* Theme Color */
 

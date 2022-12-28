@@ -4,6 +4,7 @@ import { Content } from "./components/Content/Content";
 import { LeftAside } from "./components/LeftAside/LeftAside";
 import { RightAside } from "./components/RightAside/RightAside";
 import styled from "styled-components";
+import { Authorization } from "./components/Authorization/Authorization";
 
 const WrapperApp = styled.div`
   height: 100vh;
@@ -25,6 +26,7 @@ const App = () => {
           path="/dialog/:id"
           element={<Content setOpenRightAside={setOpenRightAside} />}
         />
+        <Route path="/authorization" element={<Authorization />} />
       </Routes>
       <RightAside
         setOpenRightAside={setOpenRightAside}
