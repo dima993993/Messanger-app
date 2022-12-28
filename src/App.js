@@ -1,4 +1,5 @@
 import { useState } from "react";
+import { Routes, Route } from "react-router-dom";
 import { Content } from "./components/Content/Content";
 import { LeftAside } from "./components/LeftAside/LeftAside";
 import { RightAside } from "./components/RightAside/RightAside";
@@ -15,7 +16,16 @@ const App = () => {
   return (
     <WrapperApp>
       <LeftAside />
-      <Content setOpenRightAside={setOpenRightAside} />
+      <Routes>
+        <Route
+          path="/"
+          element={<Content setOpenRightAside={setOpenRightAside} />}
+        />
+        <Route
+          path="/dialog/:id"
+          element={<Content setOpenRightAside={setOpenRightAside} />}
+        />
+      </Routes>
       <RightAside
         setOpenRightAside={setOpenRightAside}
         openRightAside={openRightAside}

@@ -1,8 +1,8 @@
 import styled from "styled-components";
 
 const WrapperUserPhoto = styled.div`
-  width: 40px;
-  height: 40px;
+  width: 30px;
+  height: 30px;
   flex-shrink: 0;
   display: flex;
   justify-content: center;
@@ -12,15 +12,27 @@ const WrapperUserPhoto = styled.div`
   img {
     width: 100%;
   }
+  .no_photo {
+    width: 100%;
+    height: 100%;
+    background-color: #378edb;
+    font-weight: var(--fw-bold);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
 `;
 
-const UserPhoto = () => {
+const UserPhoto = ({ photo, firstName, lastName }) => {
   return (
     <WrapperUserPhoto>
-      <img
-        src="https://cdn-icons-png.flaticon.com/512/149/149071.png"
-        alt="User"
-      />
+      {photo ? (
+        <img src={photo} alt={firstName + " " + lastName} />
+      ) : (
+        <div className="no_photo">
+          <span>{firstName[0] + lastName[0]}</span>
+        </div>
+      )}
     </WrapperUserPhoto>
   );
 };

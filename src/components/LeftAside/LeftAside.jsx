@@ -1,13 +1,12 @@
-import styled from "styled-components";
+import { connect } from "react-redux";
 import Dialog from "./Dialog";
 import HeaderLeftAside from "./HeaderLeftAside";
-
-let arr = [
-  "Dima Pupkin",
-  "Vasya Golovanov",
-  "Jeka Miheev",
-  "Nikolay Starokozatskiya",
-];
+import styled from "styled-components";
+import {
+  chooseCurrentDialog,
+  chooseCurrentDialogUser,
+} from "../../redux/dialogsReducer";
+let dialogs = ["123", "456", "789"];
 
 const LeftAsideWrapper = styled.div`
   background-color: var(--color-basic);
@@ -29,15 +28,29 @@ const DialogsContainer = styled.div`
   margin: var(--mr-md) var(--mr-xs);
 `;
 
-export const LeftAside = () => {
+const LeftAsideComponent = (props) => {
   return (
     <LeftAsideWrapper>
       <HeaderLeftAside />
       <DialogsContainer>
-        {arr.map((dialog, index) => {
-          return <Dialog key={index} text={dialog} id={index} />;
+        {dialogs.map((dialog, index) => {
+          return <Dialog key={index} dialog={dialog} />;
         })}
       </DialogsContainer>
     </LeftAsideWrapper>
   );
 };
+
+const mapStateToProps = (state) => {
+  return {
+    dialogs: state.dialogsReducer.dialogs,
+    messages: state.messagesReducer.messages,
+    authorizationUser: state.usersReducer.authorizationUser,
+    currentDialogUser: state.dialogsReducer.currentDialogUser,
+  };
+};
+
+export const LeftAside = connect(mapStateToProps, {
+  chooseCurrentDialog,
+  chooseCurrentDialogUser,
+})(LeftAsideComponent);

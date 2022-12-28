@@ -1,8 +1,6 @@
 import styled from "styled-components";
 import Message from "./Message";
 
-let arr = [1, 2, 3, 4, 5, 6, 7, 8, 9, 0, 1, 2, 3, 4, 5, 6, 7, 8, 9];
-
 const MessagesContainerWrapper = styled.div`
   width: 100%;
   height: var(--content-height);
@@ -24,8 +22,8 @@ const MessagesContainerWrapper = styled.div`
     margin: 0 auto;
   }
 `;
-
-const MessagesContainer = () => {
+let arr = [1, 2, 3, 4, 5, 6, 7, 8, 9, 0];
+const MessagesContainer = ({ messages }) => {
   return (
     <MessagesContainerWrapper>
       <div>

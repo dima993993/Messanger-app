@@ -1,7 +1,14 @@
-import styled from "styled-components";
+import { useEffect } from "react";
+import { connect } from "react-redux";
+import {
+  chooseCurrentDialog,
+  chooseCurrentDialogUser,
+} from "../../redux/dialogsReducer";
 import EnterMessege from "./EnterMessage";
 import HeaderContent from "./HeaderContent";
 import MessagesContainer from "./Messages/MessagesContainer";
+import Preloader from "./../Common/Preloader";
+import styled from "styled-components";
 
 const ContentWrapper = styled.div`
   background-color: var(--color-aditional);
@@ -10,7 +17,7 @@ const ContentWrapper = styled.div`
   position: relative;
 `;
 
-export const Content = (props) => {
+const ContentComponent = (props) => {
   return (
     <ContentWrapper>
       <HeaderContent setOpenRightAside={props.setOpenRightAside} />
@@ -20,4 +27,16 @@ export const Content = (props) => {
   );
 };
 
-export default Content;
+const mapStateToProps = (state) => {
+  return {
+    dialogs: state.dialogsReducer.dialogs,
+    currentDialog: state.dialogsReducer.currentDialog,
+    messages: state.messagesReducer.messages,
+    currentDialogUser: state.dialogsReducer.currentDialogUser,
+  };
+};
+
+export const Content = connect(mapStateToProps, {
+  chooseCurrentDialog,
+  chooseCurrentDialogUser,
+})(ContentComponent);

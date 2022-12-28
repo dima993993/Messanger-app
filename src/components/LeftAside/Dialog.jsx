@@ -14,7 +14,7 @@ const DialogWrapper = styled.div`
     font-size: var(--fs-sm);
     border-radius: var(--radius-sm);
     transition: var(--tr-fast);
-    &:hover {
+    &:hover:not(.active-link) {
       background-color: var(--color-aditional);
     }
     .name_block {
@@ -33,19 +33,24 @@ const DialogWrapper = styled.div`
   }
 `;
 
-const Dialog = ({ text, id }) => {
+const Dialog = ({ dialog, userInfo, date, chooseCurrentDialog }) => {
   return (
     <DialogWrapper>
       <NavLink
-        to={`/${id}`}
+        to={`/dialog/${dialog.idDialog}`}
         className={(state) => (state.isActive ? "active-link" : "")}
+        onClick={() => chooseCurrentDialog(dialog)}
       >
         <div className="photo">
-          <UserPhoto />
+          <UserPhoto
+            photo={null}
+            firstName={"firstName"}
+            lastName={"lastName"}
+          />
         </div>
         <div className="name_block">
-          <div>{text}</div>
-          <div>Lorem, ipsum dolor.</div>
+          <div>{dialog}</div>
+          <div>{dialog}</div>
         </div>
         <div className="date">Date</div>
       </NavLink>

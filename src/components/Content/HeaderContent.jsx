@@ -17,12 +17,13 @@ const HeaderContentWrapper = styled.div`
   }
 `;
 
-const HeaderContent = ({ setOpenRightAside }) => {
+const HeaderContent = ({ setOpenRightAside, userInfo }) => {
   return (
     <HeaderContentWrapper>
       <div className="user" onClick={() => setOpenRightAside(true)}>
-        <UserPhoto />
-        <div>Name User</div>
+        <UserPhoto photo={null} firstName={"firstName"} lastName={"lastName"} />
+
+        <div>FirstName LastName</div>
       </div>
       <div className="menu"></div>
     </HeaderContentWrapper>
