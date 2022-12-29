@@ -5,7 +5,11 @@ import HeaderContent from "./HeaderContent";
 import MessagesContainer from "./Messages/MessagesContainer";
 import Preloader from "./../Common/Preloader";
 import styled from "styled-components";
-import { messagesCombine } from "../../redux/messagesReducer";
+import {
+  addNewMessage,
+  changeTextValueMessage,
+  messagesCombine,
+} from "../../redux/messagesReducer";
 
 const ContentWrapper = styled.div`
   background-color: var(--color-aditional);
@@ -27,7 +31,14 @@ const ContentComponent = (props) => {
             messages={props.combineMessage}
             authorizedUser={props.authorizedUser}
           />
-          <EnterMessege />
+          <EnterMessege
+            messageTextValue={props.messageTextValue}
+            changeValue={props.changeTextValueMessage}
+            addNewMessage={props.addNewMessage}
+            idAuthUser={props.authorizedUser[0].idUser}
+            idDialog={props.currentDialog.idDialog}
+            messagesCombine={props.messagesCombine}
+          />
         </>
       ) : (
         <div></div>
@@ -43,9 +54,13 @@ const mapStateToProps = (state) => {
     currentDialogUserInfo: state.dialogsReducer.currentDialogUserInfo,
     combineMessage: state.messagesReducer.combineMessage,
     authorizedUser: state.usersReducer.authorizedUser,
+    messageTextValue: state.messagesReducer.messageTextValue,
   };
 };
 
 export const Content = connect(mapStateToProps, {
   chooseCurrentDialog,
+  changeTextValueMessage,
+  addNewMessage,
+  messagesCombine,
 })(ContentComponent);

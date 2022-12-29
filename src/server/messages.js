@@ -1,6 +1,7 @@
 const messages = [
   {
     idDialog: 1001,
+    idUser: 1,
     messages: [
       { idUser: 1, date: new Date("12.26.2022 10:12:36"), message: "Hello" },
       {
@@ -13,6 +14,7 @@ const messages = [
   },
   {
     idDialog: 1001,
+    idUser: 2,
     messages: [
       { idUser: 2, date: new Date("12.26.2022 10:13:01"), message: "Hello" },
       {
@@ -29,6 +31,7 @@ const messages = [
   },
   {
     idDialog: 1002,
+    idUser: 1,
     messages: [
       { idUser: 1, date: new Date("12.26.2022 12:13:01"), message: "Hello" },
       {
@@ -50,6 +53,7 @@ const messages = [
   },
   {
     idDialog: 1002,
+    idUser: 3,
     messages: [
       { idUser: 3, date: new Date("12.26.2022 12:13:45"), message: "Hello" },
       {
@@ -66,6 +70,7 @@ const messages = [
   },
   {
     idDialog: 1003,
+    idUser: 2,
     messages: [
       { idUser: 2, date: new Date("12.26.2022 12:13:01"), message: "Hello" },
       {
@@ -87,6 +92,7 @@ const messages = [
   },
   {
     idDialog: 1003,
+    idUser: 3,
     messages: [
       { idUser: 3, date: new Date("12.26.2022 12:13:45"), message: "Hello" },
       {

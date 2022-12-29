@@ -4,7 +4,7 @@ const WrapperMessage = styled.div`
   max-width: 100%;
 
   & > div {
-    max-width: 80%;
+    max-width: 60%;
     display: inline-block;
     border-radius: var(--radius-lg);
     font-size: var(--fs-sm);
@@ -20,8 +20,6 @@ const WrapperMessage = styled.div`
 `;
 
 const Message = ({ message, authUserId }) => {
-  console.log(message.idUser);
-  console.log(authUserId);
   return (
     <WrapperMessage idUser={message.idUser} authUserId={authUserId}>
       <div>

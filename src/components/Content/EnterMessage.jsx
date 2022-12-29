@@ -33,11 +33,37 @@ const WrapperMessage = styled.div`
   }
 `;
 
-const EnterMessege = () => {
+const EnterMessege = ({
+  messageTextValue,
+  changeValue,
+  addNewMessage,
+  idAuthUser,
+  idDialog,
+  messagesCombine,
+}) => {
   return (
     <WrapperMessage>
-      <input type="text" placeholder="Enter Message" />
-      <div className="icon">
+      <input
+        type="text"
+        placeholder="Enter Message"
+        value={messageTextValue}
+        onChange={(e) => changeValue(e.target.value)}
+        onKeyDown={(e) => {
+          if (e.key === "Enter") {
+            addNewMessage(idDialog, idAuthUser, messageTextValue);
+            messagesCombine(idDialog);
+            changeValue("");
+          }
+        }}
+      />
+      <div
+        className="icon"
+        onClick={() => {
+          addNewMessage(idDialog, idAuthUser, messageTextValue);
+          messagesCombine(idDialog);
+          changeValue("");
+        }}
+      >
         <FontAwesomeIcon icon={faPaperPlane} />
       </div>
     </WrapperMessage>
