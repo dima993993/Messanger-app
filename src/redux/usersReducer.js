@@ -2,9 +2,13 @@ import users from "./../server/users";
 
 const USER_AUTHORIZATION = "USER_AUTHORIZATION";
 
+const getAuthUser = localStorage.getItem("authUser");
+const authUser = JSON.parse(getAuthUser);
+console.log(authUser);
+
 const initialState = {
   users: users,
-  authorizedUser: [],
+  authorizedUser: authUser ? authUser : [],
 };
 
 const usersReducer = (state = initialState, action) => {
@@ -15,6 +19,7 @@ const usersReducer = (state = initialState, action) => {
           user.authorization.login === action.login &&
           user.authorization.password === action.password
       );
+      localStorage.setItem("authUser", JSON.stringify(checkUser));
       return {
         ...state,
         authorizedUser: checkUser,

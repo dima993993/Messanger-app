@@ -31,7 +31,7 @@ const users = [
         "https://play-lh.googleusercontent.com/zg-BpJxDelX2-C6GxWOrdYwmrM8ekYwdHXNo4INck2C66kzDsJRhm3ggz6b-y7EWOQ",
       aboutMe: "lorem lorem lorem lorem lorem lorem",
     },
-    chats: [1001],
+    chats: [1001, 1003],
   },
   {
     idUser: 3,
@@ -65,6 +65,23 @@ const users = [
       aboutMe: "lorem lorem lorem lorem lorem lorem",
     },
     chats: [],
+  },
+  {
+    idUser: 5,
+    authorization: {
+      login: "1010",
+      password: "1010",
+    },
+    profile: {
+      firstName: "Masha",
+      lastName: "Bakanova",
+      nicName: "Kiss",
+      phone: "+380992345607",
+      photo:
+        "https://www.biletik.aero/upload/medialibrary/807/807f262b60da392f1e09aa6d33f20a9b.png",
+      aboutMe: "lorem lorem lorem lorem lorem lorem",
+    },
+    chats: [1003],
   },
 ];
 
