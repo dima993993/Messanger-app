@@ -33,14 +33,25 @@ const DialogWrapper = styled.div`
   }
 `;
 
-const Dialog = ({ dialog, userInfo, date, chooseCurrentDialog }) => {
+const Dialog = ({
+  dialog,
+  userInfo,
+  date,
+  chooseCurrentDialog,
+  chooseCurrentDialogUserInfo,
+  messagesCombine,
+}) => {
   console.log(userInfo);
   return (
     <DialogWrapper>
       <NavLink
         to={`/dialog/${dialog.idDialog}`}
         className={(state) => (state.isActive ? "active-link" : "")}
-        onClick={() => chooseCurrentDialog(dialog)}
+        onClick={() => {
+          chooseCurrentDialog(dialog);
+          chooseCurrentDialogUserInfo(userInfo);
+          messagesCombine(dialog.idDialog);
+        }}
       >
         <div className="photo">
           <UserPhoto

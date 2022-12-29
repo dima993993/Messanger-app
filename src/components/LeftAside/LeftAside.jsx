@@ -2,7 +2,11 @@ import { connect } from "react-redux";
 import Dialog from "./Dialog";
 import HeaderLeftAside from "./HeaderLeftAside";
 import styled from "styled-components";
-import { chooseCurrentDialog } from "../../redux/dialogsReducer";
+import {
+  chooseCurrentDialog,
+  chooseCurrentDialogUserInfo,
+} from "../../redux/dialogsReducer";
+import { messagesCombine } from "../../redux/messagesReducer";
 
 const LeftAsideWrapper = styled.div`
   background-color: var(--color-basic);
@@ -25,7 +29,6 @@ const DialogsContainer = styled.div`
 `;
 
 const LeftAsideComponent = (props) => {
-  // console.log(props.authorizedUser[0].chats);
   let changeDialogs;
   if (props.authorizedUser.length > 0) {
     changeDialogs = props.authorizedUser[0].chats.map((chat) =>
@@ -45,7 +48,6 @@ const LeftAsideComponent = (props) => {
                 +objUsers[0] === props.authorizedUser[0].idUser
                   ? objUsers[1]
                   : objUsers[0];
-              console.log(objUsers);
               return (
                 <Dialog
                   key={index}
@@ -57,6 +59,10 @@ const LeftAsideComponent = (props) => {
                     ":" +
                     dialog[0].date.getMinutes()
                   }
+                  chooseCurrentDialogUserInfo={
+                    props.chooseCurrentDialogUserInfo
+                  }
+                  messagesCombine={props.messagesCombine}
                 />
               );
             })}
@@ -78,4 +84,6 @@ const mapStateToProps = (state) => {
 
 export const LeftAside = connect(mapStateToProps, {
   chooseCurrentDialog,
+  chooseCurrentDialogUserInfo,
+  messagesCombine,
 })(LeftAsideComponent);

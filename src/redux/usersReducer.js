@@ -4,7 +4,6 @@ const USER_AUTHORIZATION = "USER_AUTHORIZATION";
 
 const getAuthUser = localStorage.getItem("authUser");
 const authUser = JSON.parse(getAuthUser);
-console.log(authUser);
 
 const initialState = {
   users: users,

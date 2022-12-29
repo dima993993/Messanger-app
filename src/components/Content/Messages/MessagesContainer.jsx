@@ -22,13 +22,19 @@ const MessagesContainerWrapper = styled.div`
     margin: 0 auto;
   }
 `;
-let arr = [1, 2, 3, 4, 5, 6, 7, 8, 9, 0];
-const MessagesContainer = ({ messages }) => {
+
+const MessagesContainer = ({ messages, authorizedUser }) => {
   return (
     <MessagesContainerWrapper>
       <div>
-        {arr.map((message, index) => {
-          return <Message key={index} message={message} />;
+        {messages.map((message, index) => {
+          return (
+            <Message
+              key={index}
+              message={message}
+              authUserId={authorizedUser[0].idUser}
+            />
+          );
         })}
       </div>
     </MessagesContainerWrapper>

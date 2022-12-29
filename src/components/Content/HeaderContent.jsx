@@ -21,9 +21,13 @@ const HeaderContent = ({ setOpenRightAside, userInfo }) => {
   return (
     <HeaderContentWrapper>
       <div className="user" onClick={() => setOpenRightAside(true)}>
-        <UserPhoto photo={null} firstName={"firstName"} lastName={"lastName"} />
+        <UserPhoto
+          photo={userInfo.photo}
+          firstName={userInfo.firstName}
+          lastName={userInfo.lastName}
+        />
 
-        <div>FirstName LastName</div>
+        <div>{userInfo.firstName + " " + userInfo.lastName}</div>
       </div>
       <div className="menu"></div>
     </HeaderContentWrapper>

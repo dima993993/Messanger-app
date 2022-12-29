@@ -10,20 +10,22 @@ const WrapperMessage = styled.div`
     font-size: var(--fs-sm);
     padding: var(--pd-sm);
     margin: var(--mr-sm) 0;
-    /* background-color: ${(props) =>
-      props.idUser === props.authorized
+    background-color: ${(props) =>
+      props.idUser === props.authUserId
         ? "var(--color-your-messege)"
         : "var(--color-icon)"};
-    float: ${(props) => (props.idUser === props.authorized ? "right" : "left")};
-    clear: both; */
+    float: ${(props) => (props.idUser === props.authUserId ? "right" : "left")};
+    clear: both;
   }
 `;
 
-const Message = ({ message }) => {
+const Message = ({ message, authUserId }) => {
+  console.log(message.idUser);
+  console.log(authUserId);
   return (
-    <WrapperMessage>
+    <WrapperMessage idUser={message.idUser} authUserId={authUserId}>
       <div>
-        <div>{message}</div>
+        <div>{message.message}</div>
       </div>
     </WrapperMessage>
   );
