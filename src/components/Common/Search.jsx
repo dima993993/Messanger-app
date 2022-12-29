@@ -29,13 +29,20 @@ const WrapperSearch = styled.div`
   }
 `;
 
-const Search = () => {
+const Search = ({ searchFieldValue, fieldValue }) => {
   return (
     <WrapperSearch>
       <div className="icon_search">
         <FontAwesomeIcon icon={faSearch} />
       </div>
-      <input type="text" placeholder="Search" />
+      <input
+        type="text"
+        placeholder="Search"
+        value={fieldValue}
+        onChange={(e) => {
+          searchFieldValue(e.target.value);
+        }}
+      />
     </WrapperSearch>
   );
 };

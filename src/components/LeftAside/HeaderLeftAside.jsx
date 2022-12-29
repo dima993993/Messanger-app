@@ -19,14 +19,14 @@ const WrapperLeftAsideHeader = styled.div`
   }
 `;
 
-const HeaderLeftAside = () => {
+const HeaderLeftAside = ({ searchFieldValue, fieldValue }) => {
   return (
     <WrapperLeftAsideHeader>
       <div>
         <FontAwesomeIcon icon={faBars} />
       </div>
       <div>
-        <Search />
+        <Search searchFieldValue={searchFieldValue} fieldValue={fieldValue} />
       </div>
     </WrapperLeftAsideHeader>
   );

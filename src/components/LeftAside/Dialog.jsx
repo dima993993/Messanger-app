@@ -41,7 +41,6 @@ const Dialog = ({
   chooseCurrentDialogUserInfo,
   messagesCombine,
 }) => {
-  console.log(userInfo);
   return (
     <DialogWrapper>
       <NavLink

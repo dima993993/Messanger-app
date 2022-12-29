@@ -5,6 +5,7 @@ import styled from "styled-components";
 import {
   chooseCurrentDialog,
   chooseCurrentDialogUserInfo,
+  searchFieldValue,
 } from "../../redux/dialogsReducer";
 import { messagesCombine } from "../../redux/messagesReducer";
 
@@ -40,7 +41,10 @@ const LeftAsideComponent = (props) => {
     <LeftAsideWrapper>
       {props.authorizedUser.length > 0 ? (
         <>
-          <HeaderLeftAside />
+          <HeaderLeftAside
+            searchFieldValue={props.searchFieldValue}
+            fieldValue={props.fieldValue}
+          />
           <DialogsContainer>
             {changeDialogs.map((dialog, index) => {
               let objUsers = Object.keys(dialog[0].userInfo);
@@ -79,11 +83,12 @@ const mapStateToProps = (state) => {
   return {
     dialogs: state.dialogsReducer.dialogs,
     authorizedUser: state.usersReducer.authorizedUser,
+    fieldValue: state.dialogsReducer.fieldValue,
   };
 };
-
 export const LeftAside = connect(mapStateToProps, {
   chooseCurrentDialog,
   chooseCurrentDialogUserInfo,
   messagesCombine,
+  searchFieldValue,
 })(LeftAsideComponent);
