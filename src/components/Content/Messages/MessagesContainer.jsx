@@ -23,9 +23,9 @@ const MessagesContainerWrapper = styled.div`
   }
 `;
 
-const MessagesContainer = ({ messages, authorizedUser }) => {
+const MessagesContainer = ({ messages, authorizedUser, scrollContainer }) => {
   return (
-    <MessagesContainerWrapper>
+    <MessagesContainerWrapper ref={scrollContainer}>
       <div>
         {messages.map((message, index) => {
           return (

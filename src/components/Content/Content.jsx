@@ -10,6 +10,7 @@ import {
   changeTextValueMessage,
   messagesCombine,
 } from "../../redux/messagesReducer";
+import { useRef } from "react";
 
 const ContentWrapper = styled.div`
   background-color: var(--color-aditional);
@@ -19,6 +20,13 @@ const ContentWrapper = styled.div`
 `;
 
 const ContentComponent = (props) => {
+  // Scroll to last message
+  let scrollContainer = useRef(null); // Change scroll container
+  if (scrollContainer.current !== null) {
+    setTimeout(function () {
+      scrollContainer.current.scrollTo(0, scrollContainer.current.scrollHeight);
+    }, 100);
+  }
   return (
     <ContentWrapper>
       {props.authorizedUser.length > 0 && props.currentDialog ? (
@@ -30,6 +38,7 @@ const ContentComponent = (props) => {
           <MessagesContainer
             messages={props.combineMessage}
             authorizedUser={props.authorizedUser}
+            scrollContainer={scrollContainer}
           />
           <EnterMessege
             messageTextValue={props.messageTextValue}

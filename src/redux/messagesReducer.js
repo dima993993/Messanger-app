@@ -12,6 +12,19 @@ const initialState = {
 
 const messagesReducer = (state = initialState, action) => {
   switch (action.type) {
+    case COMBINE_MESSAGE:
+      let filterMessage = state.messages.filter(
+        (message) => message.idDialog === action.idDialog
+      );
+      let unitMessageTwoUsers = [
+        ...filterMessage[0].messages,
+        ...filterMessage[1].messages,
+      ];
+      let sortMessage = unitMessageTwoUsers.sort((a, b) => a.date - b.date);
+      return {
+        ...state,
+        combineMessage: sortMessage,
+      };
     case CHANGE_TEXT_VALUE_MESSAGE:
       return {
         ...state,
@@ -45,19 +58,6 @@ const messagesReducer = (state = initialState, action) => {
       return {
         ...state,
         messages: copyMessages,
-      };
-    case COMBINE_MESSAGE:
-      let filterMessage = state.messages.filter(
-        (message) => message.idDialog === action.idDialog
-      );
-      let unitMessageTwoUsers = [
-        ...filterMessage[0].messages,
-        ...filterMessage[1].messages,
-      ];
-      let sortMessage = unitMessageTwoUsers.sort((a, b) => a.date - b.date);
-      return {
-        ...state,
-        combineMessage: sortMessage,
       };
 
     default:
