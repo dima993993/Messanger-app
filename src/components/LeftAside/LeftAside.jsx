@@ -44,6 +44,7 @@ const LeftAsideComponent = (props) => {
           <HeaderLeftAside
             searchFieldValue={props.searchFieldValue}
             fieldValue={props.fieldValue}
+            setOpenMenu={props.setOpenMenu}
           />
           <DialogsContainer>
             {changeDialogs.map((dialog, index) => {

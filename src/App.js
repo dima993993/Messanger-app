@@ -7,6 +7,7 @@ import styled from "styled-components";
 import { Authorization } from "./components/Authorization/Authorization";
 import { connect } from "react-redux";
 import { useNavigate } from "react-router";
+import { Menu } from "./components/Menu/Menu";
 
 const WrapperApp = styled.div`
   height: 100vh;
@@ -16,6 +17,7 @@ const WrapperApp = styled.div`
 
 const AppComponent = (props) => {
   let [openRightAside, setOpenRightAside] = useState(false);
+  let [openMenu, setOpenMenu] = useState(false);
   let navigate = useNavigate();
   useEffect(() => {
     if (props.authorizedUser.length === 0) {
@@ -26,17 +28,18 @@ const AppComponent = (props) => {
   }, [props.authorizedUser]);
   return (
     <WrapperApp>
-      <LeftAside />
+      <Menu openMenu={openMenu} setOpenMenu={setOpenMenu} />
+      <LeftAside setOpenMenu={setOpenMenu} />
       <Routes>
         <Route
-          path="/"
+          path='/'
           element={<Content setOpenRightAside={setOpenRightAside} />}
         />
         <Route
-          path="/dialog/:id"
+          path='/dialog/:id'
           element={<Content setOpenRightAside={setOpenRightAside} />}
         />
-        <Route path="/authorization" element={<Authorization />} />
+        <Route path='/authorization' element={<Authorization />} />
       </Routes>
       <RightAside
         setOpenRightAside={setOpenRightAside}

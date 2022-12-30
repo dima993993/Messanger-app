@@ -54,7 +54,7 @@ const messagesReducer = (state = initialState, action) => {
       };
       let copyMessages = [...state.messages];
       copyMessages.splice(searchIndexMessage, 1, objectDialogMessage);
-      console.log(objectMessage, state.messages[searchIndexMessage]);
+
       return {
         ...state,
         messages: copyMessages,

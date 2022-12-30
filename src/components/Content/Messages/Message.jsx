@@ -5,7 +5,8 @@ const WrapperMessage = styled.div`
 
   & > div {
     max-width: 60%;
-    display: inline-block;
+    display: flex;
+    align-items: center;
     border-radius: var(--radius-lg);
     font-size: var(--fs-sm);
     padding: var(--pd-sm);
@@ -13,9 +14,19 @@ const WrapperMessage = styled.div`
     background-color: ${(props) =>
       props.idUser === props.authUserId
         ? "var(--color-your-messege)"
-        : "var(--color-icon)"};
+        : "var(--color-basic)"};
     float: ${(props) => (props.idUser === props.authUserId ? "right" : "left")};
     clear: both;
+  }
+  .date {
+    font-size: var(--fs-xs);
+    color: var(--color-text-sub);
+  }
+  .date_left {
+    margin-left: var(--mr-xs);
+  }
+  .date_right {
+    margin-right: var(--mr-xs);
   }
 `;
 
@@ -23,7 +34,21 @@ const Message = ({ message, authUserId }) => {
   return (
     <WrapperMessage idUser={message.idUser} authUserId={authUserId}>
       <div>
+        {message.idUser === authUserId ? (
+          <div className='date date_right'>
+            {message.date.getHours() + ":" + message.date.getMinutes()}
+          </div>
+        ) : (
+          ""
+        )}
         <div>{message.message}</div>
+        {message.idUser !== authUserId ? (
+          <div className='date date_left'>
+            {message.date.getHours() + ":" + message.date.getMinutes()}
+          </div>
+        ) : (
+          ""
+        )}
       </div>
     </WrapperMessage>
   );

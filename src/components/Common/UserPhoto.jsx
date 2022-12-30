@@ -1,8 +1,8 @@
 import styled from "styled-components";
 
 const WrapperUserPhoto = styled.div`
-  width: 30px;
-  height: 30px;
+  width: 40px;
+  height: 40px;
   flex-shrink: 0;
   display: flex;
   justify-content: center;
@@ -29,7 +29,7 @@ const UserPhoto = ({ photo, firstName, lastName }) => {
       {photo ? (
         <img src={photo} alt={firstName + " " + lastName} />
       ) : (
-        <div className="no_photo">
+        <div className='no_photo'>
           <span>{firstName[0] + lastName[0]}</span>
         </div>
       )}

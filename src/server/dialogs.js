@@ -7,8 +7,7 @@ const dialogs = [
       1: {
         firstName: "Dima",
         lastName: "Terekhov",
-        photo:
-          "https://images.unsplash.com/photo-1566275529824-cca6d008f3da?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxzZWFyY2h8NXx8cGhvdG98ZW58MHx8MHx8&w=1000&q=80",
+        photo: "https://1x.com/assets/img/pro08.jpg",
       },
       2: {
         firstName: "Vika",
@@ -26,8 +25,7 @@ const dialogs = [
       1: {
         firstName: "Dima",
         lastName: "Terekhov",
-        photo:
-          "https://images.unsplash.com/photo-1566275529824-cca6d008f3da?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxzZWFyY2h8NXx8cGhvdG98ZW58MHx8MHx8&w=1000&q=80",
+        photo: "https://1x.com/assets/img/pro08.jpg",
       },
       3: {
         firstName: "Nikolay",

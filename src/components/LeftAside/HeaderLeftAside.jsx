@@ -19,10 +19,10 @@ const WrapperLeftAsideHeader = styled.div`
   }
 `;
 
-const HeaderLeftAside = ({ searchFieldValue, fieldValue }) => {
+const HeaderLeftAside = ({ searchFieldValue, fieldValue, setOpenMenu }) => {
   return (
     <WrapperLeftAsideHeader>
-      <div>
+      <div onClick={() => setOpenMenu(true)}>
         <FontAwesomeIcon icon={faBars} />
       </div>
       <div>

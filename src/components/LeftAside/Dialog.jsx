@@ -41,6 +41,11 @@ const Dialog = ({
   chooseCurrentDialogUserInfo,
   messagesCombine,
 }) => {
+  let cutLastMessage =
+    dialog.lastMessage.length > 20
+      ? dialog.lastMessage.slice(0, 20) + "..."
+      : dialog.lastMessage;
+
   return (
     <DialogWrapper>
       <NavLink
@@ -50,20 +55,19 @@ const Dialog = ({
           chooseCurrentDialog(dialog);
           chooseCurrentDialogUserInfo(userInfo);
           messagesCombine(dialog.idDialog);
-        }}
-      >
-        <div className="photo">
+        }}>
+        <div>
           <UserPhoto
             photo={userInfo.photo}
             firstName={userInfo.firstName}
             lastName={userInfo.lastName}
           />
         </div>
-        <div className="name_block">
+        <div className='name_block'>
           <div>{userInfo.firstName + " " + userInfo.lastName}</div>
-          <div>{dialog.lastMessage}</div>
+          <div>{cutLastMessage}</div>
         </div>
-        <div className="date">{date}</div>
+        <div className='date'>{date}</div>
       </NavLink>
     </DialogWrapper>
   );

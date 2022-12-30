@@ -36,12 +36,11 @@ const dialogsReducer = (state = initialState, action) => {
       let searchDialogsIndex = state.dialogs.findIndex(
         (dialog) => dialog.idDialog === action.idDialog
       );
+
       searchDialog[0]["lastMessage"] = action.lastMessage;
       searchDialog[0]["date"] = action.date;
       let cloneDialogs = [...state.dialogs];
       cloneDialogs.splice(searchDialogsIndex, 1, searchDialog[0]);
-      console.log(cloneDialogs);
-
       return {
         ...state,
         dialogs: cloneDialogs,
