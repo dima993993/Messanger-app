@@ -1,5 +1,5 @@
 import { connect } from "react-redux";
-import { chooseCurrentDialog } from "../../redux/dialogsReducer";
+import { chooseCurrentDialog, updateDialogs } from "../../redux/dialogsReducer";
 import EnterMessege from "./EnterMessage";
 import HeaderContent from "./HeaderContent";
 import MessagesContainer from "./Messages/MessagesContainer";
@@ -47,6 +47,7 @@ const ContentComponent = (props) => {
             idAuthUser={props.authorizedUser[0].idUser}
             idDialog={props.currentDialog.idDialog}
             messagesCombine={props.messagesCombine}
+            updateDialogs={props.updateDialogs}
           />
         </>
       ) : (
@@ -72,4 +73,5 @@ export const Content = connect(mapStateToProps, {
   changeTextValueMessage,
   addNewMessage,
   messagesCombine,
+  updateDialogs,
 })(ContentComponent);

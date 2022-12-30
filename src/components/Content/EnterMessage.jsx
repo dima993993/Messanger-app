@@ -40,30 +40,36 @@ const EnterMessege = ({
   idAuthUser,
   idDialog,
   messagesCombine,
+  updateDialogs,
 }) => {
   return (
     <WrapperMessage>
       <input
-        type="text"
-        placeholder="Enter Message"
+        type='text'
+        placeholder='Enter Message'
         value={messageTextValue}
         onChange={(e) => changeValue(e.target.value)}
         onKeyDown={(e) => {
           if (e.key === "Enter") {
-            addNewMessage(idDialog, idAuthUser, messageTextValue);
-            messagesCombine(idDialog);
-            changeValue("");
+            if (messageTextValue !== "") {
+              addNewMessage(idDialog, idAuthUser, messageTextValue);
+              messagesCombine(idDialog);
+              updateDialogs(idDialog, messageTextValue, new Date());
+              changeValue("");
+            }
           }
         }}
       />
       <div
-        className="icon"
+        className='icon'
         onClick={() => {
-          addNewMessage(idDialog, idAuthUser, messageTextValue);
-          messagesCombine(idDialog);
-          changeValue("");
-        }}
-      >
+          if (messageTextValue !== "") {
+            addNewMessage(idDialog, idAuthUser, messageTextValue);
+            messagesCombine(idDialog);
+            updateDialogs(idDialog, messageTextValue, new Date());
+            changeValue("");
+          }
+        }}>
         <FontAwesomeIcon icon={faPaperPlane} />
       </div>
     </WrapperMessage>
