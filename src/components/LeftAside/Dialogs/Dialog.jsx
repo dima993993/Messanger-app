@@ -40,6 +40,8 @@ const Dialog = ({
   chooseCurrentDialog,
   chooseCurrentDialogUserInfo,
   messagesCombine,
+  chooseCurrentUser,
+  authUserId,
 }) => {
   // Обрезаем сообщение которое отображается в списке диалогов
   let cutLastMessage =
@@ -56,6 +58,7 @@ const Dialog = ({
           chooseCurrentDialog(dialog); // Выбираем диалог который  нужно отобразить
           chooseCurrentDialogUserInfo(userInfo); // Выбираем информацию о пользователе с диалогов
           messagesCombine(dialog.idDialog); // Обьединяем сообщения 2х пользователей в один диалог
+          chooseCurrentUser(Object.keys(dialog.userInfo), authUserId); // Отправляем массив с id юзерами
         }}>
         <div>
           <UserPhoto

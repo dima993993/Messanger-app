@@ -11,10 +11,10 @@ const MenuWrapper = styled.div`
   height: 100vh;
   position: absolute;
   top: 0;
-  left: ${(props) => (props.openMenu ? "0" : "-250px")};
+  left: ${(props) => (props.openMenu ? "0" : "var(--width-aside-invers)")};
   transition: var(--tr-middle);
   background-color: var(--color-basic);
-  z-index: 9999;
+  z-index: 999;
 `;
 const BodyBgMenu = styled.div`
   display: ${(props) => (props.openMenu ? "block" : "none")};
@@ -24,7 +24,7 @@ const BodyBgMenu = styled.div`
   top: 0;
   bottom: 0;
   background-color: rgba(0, 0, 0, 0.5);
-  z-index: 999;
+  z-index: 99;
 `;
 
 const MenuComponent = ({ openMenu, setOpenMenu, ...props }) => {

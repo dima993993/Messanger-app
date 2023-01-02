@@ -7,6 +7,7 @@ const DialogsContainer = ({
   chooseCurrentDialogUserInfo,
   messagesCombine,
   dialogs,
+  chooseCurrentUser,
 }) => {
   // Получаем список диалогов авторизованного пользователя
   let changeDialogs;
@@ -35,6 +36,8 @@ const DialogsContainer = ({
               }
               chooseCurrentDialogUserInfo={chooseCurrentDialogUserInfo}
               messagesCombine={messagesCombine}
+              chooseCurrentUser={chooseCurrentUser}
+              authUserId={authorizedUser[0].idUser}
             />
           );
         })}

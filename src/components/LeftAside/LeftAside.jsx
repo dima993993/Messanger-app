@@ -8,6 +8,7 @@ import {
 } from "../../redux/dialogsReducer";
 import { messagesCombine } from "../../redux/messagesReducer";
 import DialogsContainer from "./Dialogs/DialogsContainer";
+import { chooseCurrentUser } from "../../redux/usersReducer";
 
 const LeftAsideWrapper = styled.div`
   background-color: var(--color-basic);
@@ -57,4 +58,5 @@ export const LeftAside = connect(mapStateToProps, {
   chooseCurrentDialogUserInfo,
   messagesCombine,
   searchFieldValue,
+  chooseCurrentUser,
 })(LeftAsideComponent);
