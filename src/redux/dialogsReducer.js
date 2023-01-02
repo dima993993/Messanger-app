@@ -32,15 +32,15 @@ const dialogsReducer = (state = initialState, action) => {
     case UPDATE_DIALOG:
       let searchDialog = state.dialogs.filter(
         (dialog) => dialog.idDialog === action.idDialog
-      );
+      ); // Ищем нужный диалог по id
       let searchDialogsIndex = state.dialogs.findIndex(
         (dialog) => dialog.idDialog === action.idDialog
-      );
+      ); // Ищем индекс диалога по id
 
-      searchDialog[0]["lastMessage"] = action.lastMessage;
-      searchDialog[0]["date"] = action.date;
-      let cloneDialogs = [...state.dialogs];
-      cloneDialogs.splice(searchDialogsIndex, 1, searchDialog[0]);
+      searchDialog[0]["lastMessage"] = action.lastMessage; // Изменяем последнее сообщение в диалоге
+      searchDialog[0]["date"] = action.date; // Изменяем дату в диалоге
+      let cloneDialogs = [...state.dialogs]; // Создаем копию диалогов
+      cloneDialogs.splice(searchDialogsIndex, 1, searchDialog[0]); // Удаляем старый диалог, и на его место устанавливаем новый с измененной date и lastMessage
       return {
         ...state,
         dialogs: cloneDialogs,

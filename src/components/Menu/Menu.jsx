@@ -1,14 +1,10 @@
-import styled from "styled-components";
-import UserPhoto from "../Common/UserPhoto";
-import { connect } from "react-redux";
-import MenuItem from "./MenuItem";
-import {
-  faGear,
-  faMoon,
-  faSearch,
-  faSun,
-} from "@fortawesome/free-solid-svg-icons";
 import { useState } from "react";
+import { connect } from "react-redux";
+import { faGear, faSearch } from "@fortawesome/free-solid-svg-icons";
+import MenuItem from "./MenuItem";
+import styled from "styled-components";
+import MenuHeader from "./MenuHeader";
+import { switchTheme } from "../../redux/supportReducer";
 
 const MenuWrapper = styled.div`
   width: var(--width-aside);
@@ -19,18 +15,6 @@ const MenuWrapper = styled.div`
   transition: var(--tr-middle);
   background-color: var(--color-basic);
   z-index: 9999;
-  & > div {
-    .user {
-      margin: var(--mr-sm);
-      padding: var(--pd-sm);
-      .block_photo {
-        width: 100%;
-      }
-    }
-    .name_user {
-      margin-top: var(--mr-sm);
-    }
-  }
 `;
 const BodyBgMenu = styled.div`
   display: ${(props) => (props.openMenu ? "block" : "none")};
@@ -44,56 +28,25 @@ const BodyBgMenu = styled.div`
 `;
 
 const MenuComponent = ({ openMenu, setOpenMenu, ...props }) => {
-  let getTheme = localStorage.getItem("theme");
-  let [theme, setTheme] = useState(getTheme !== null ? getTheme : "light");
-  let body = document.querySelector("body");
-  body.setAttribute("data-theme", theme);
-  let profile =
-    props.authorizedUser.length > 0 ? props.authorizedUser[0].profile : "";
+  if (props.authorizedUser.length === 0) return null; // Проверка на авторизованного пользователя
   return (
     <>
-      {props.authorizedUser.length > 0 ? (
-        <>
-          <BodyBgMenu
-            openMenu={openMenu}
-            onClick={() => setOpenMenu(false)}></BodyBgMenu>
-          <MenuWrapper openMenu={openMenu}>
-            <div>
-              <div className='user'>
-                <div className='block_photo'>
-                  <UserPhoto
-                    photo={profile.photo}
-                    firstName={profile.firstName}
-                    lastName={profile.lastName}
-                  />
-                </div>
-                <div className='name_user'>
-                  {profile.firstName + " " + profile.lastName}
-                </div>
-              </div>
-              <div
-                onClick={() => {
-                  if (theme !== "light") {
-                    localStorage.setItem("theme", "light");
-                    setTheme("light");
-                  } else {
-                    localStorage.setItem("theme", "dark");
-                    setTheme("dark");
-                  }
-                }}>
-                <MenuItem
-                  nameItem={theme === "light" ? "Dark Theme" : "Light Theme"}
-                  icon={theme === "light" ? faMoon : faSun}
-                />
-              </div>
-              <MenuItem nameItem='Search User' icon={faSearch} />
-              <MenuItem nameItem='Settings' icon={faGear} />
-            </div>
-          </MenuWrapper>
-        </>
-      ) : (
-        <div></div>
-      )}
+      <BodyBgMenu
+        openMenu={openMenu}
+        onClick={() => setOpenMenu(false)}></BodyBgMenu>
+      <MenuWrapper openMenu={openMenu}>
+        <div>
+          <div>
+            <MenuHeader
+              profile={props.authorizedUser[0].profile}
+              theme={props.theme}
+              switchTheme={props.switchTheme}
+            />
+          </div>
+          <MenuItem nameItem='Search User' icon={faSearch} />
+          <MenuItem nameItem='Settings' icon={faGear} />
+        </div>
+      </MenuWrapper>
     </>
   );
 };
@@ -101,7 +54,8 @@ const MenuComponent = ({ openMenu, setOpenMenu, ...props }) => {
 const mapStateToProps = (state) => {
   return {
     authorizedUser: state.usersReducer.authorizedUser,
+    theme: state.supportReducer.theme,
   };
 };
 
-export const Menu = connect(mapStateToProps, {})(MenuComponent);
+export const Menu = connect(mapStateToProps, { switchTheme })(MenuComponent);

@@ -1,5 +1,4 @@
 import { connect } from "react-redux";
-import Dialog from "./Dialog";
 import HeaderLeftAside from "./HeaderLeftAside";
 import styled from "styled-components";
 import {
@@ -8,6 +7,7 @@ import {
   searchFieldValue,
 } from "../../redux/dialogsReducer";
 import { messagesCombine } from "../../redux/messagesReducer";
+import DialogsContainer from "./Dialogs/DialogsContainer";
 
 const LeftAsideWrapper = styled.div`
   background-color: var(--color-basic);
@@ -24,58 +24,23 @@ const LeftAsideWrapper = styled.div`
   &::-webkit-scrollbar-thumb {
     background-color: var(--color-icon);
   }
-`;
-const DialogsContainer = styled.div`
-  margin: var(--mr-md) var(--mr-xs);
+  .left_aside_container {
+    margin: var(--mr-md) var(--mr-xs);
+  }
 `;
 
 const LeftAsideComponent = (props) => {
-  let changeDialogs;
-  if (props.authorizedUser.length > 0) {
-    changeDialogs = props.authorizedUser[0].chats.map((chat) =>
-      props.dialogs.filter((dialog) => dialog.idDialog === chat)
-    );
-  }
-
+  if (props.authorizedUser.length === 0) return null; // Проверка на авторизованного пользователя
   return (
     <LeftAsideWrapper>
-      {props.authorizedUser.length > 0 ? (
-        <>
-          <HeaderLeftAside
-            searchFieldValue={props.searchFieldValue}
-            fieldValue={props.fieldValue}
-            setOpenMenu={props.setOpenMenu}
-          />
-          <DialogsContainer>
-            {changeDialogs.map((dialog, index) => {
-              let objUsers = Object.keys(dialog[0].userInfo);
-              let rules =
-                +objUsers[0] === props.authorizedUser[0].idUser
-                  ? objUsers[1]
-                  : objUsers[0];
-              return (
-                <Dialog
-                  key={index}
-                  dialog={dialog[0]}
-                  chooseCurrentDialog={props.chooseCurrentDialog}
-                  userInfo={dialog[0].userInfo[rules]}
-                  date={
-                    dialog[0].date.getHours() +
-                    ":" +
-                    dialog[0].date.getMinutes()
-                  }
-                  chooseCurrentDialogUserInfo={
-                    props.chooseCurrentDialogUserInfo
-                  }
-                  messagesCombine={props.messagesCombine}
-                />
-              );
-            })}
-          </DialogsContainer>
-        </>
-      ) : (
-        <div></div>
-      )}
+      <HeaderLeftAside
+        searchFieldValue={props.searchFieldValue}
+        fieldValue={props.fieldValue}
+        setOpenMenu={props.setOpenMenu}
+      />
+      <div className='left_aside_container'>
+        <DialogsContainer {...props} />
+      </div>
     </LeftAsideWrapper>
   );
 };

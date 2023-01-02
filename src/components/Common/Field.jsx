@@ -28,6 +28,7 @@ const WrapperField = styled.div`
 `;
 
 const Field = ({ type, name, nameField, placeholder, allSettings }) => {
+  // Выбор сообщения с ошибкой
   const changeError = (nameField) => {
     switch (true) {
       case allSettings.isEmpty:
@@ -43,11 +44,11 @@ const Field = ({ type, name, nameField, placeholder, allSettings }) => {
 
   return (
     <WrapperField>
-      <div className="name_field">{nameField}</div>
-      <div className="error">
+      <div className='name_field'>{nameField}</div>
+      <div className='error'>
         {allSettings.isDirty && changeError(nameField)}
       </div>
-      <div className="block_field">
+      <div className='block_field'>
         <input
           name={name}
           type={type}

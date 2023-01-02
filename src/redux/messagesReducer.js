@@ -15,12 +15,12 @@ const messagesReducer = (state = initialState, action) => {
     case COMBINE_MESSAGE:
       let filterMessage = state.messages.filter(
         (message) => message.idDialog === action.idDialog
-      );
+      ); // Ищем два обьекта с сообщениями, в одном диалоге по id
       let unitMessageTwoUsers = [
         ...filterMessage[0].messages,
         ...filterMessage[1].messages,
-      ];
-      let sortMessage = unitMessageTwoUsers.sort((a, b) => a.date - b.date);
+      ]; // Обьединяем сообщения первого пользователя и второго в один массив
+      let sortMessage = unitMessageTwoUsers.sort((a, b) => a.date - b.date); // Сортируем сообщения по дате
       return {
         ...state,
         combineMessage: sortMessage,
@@ -35,25 +35,25 @@ const messagesReducer = (state = initialState, action) => {
         (message) =>
           message.idDialog === action.idDialog &&
           message.idUser === action.idUser
-      );
+      ); // Находим нужный обьект с сообщениями для авторизованного пользователя
       let searchIndexMessage = state.messages.findIndex(
         (message) =>
           message.idDialog === action.idDialog &&
           message.idUser === action.idUser
-      );
+      ); // Находим нужный индекс обьекта с сообщениями для авторизованного пользователя
       let newMessage = {
         idUser: action.idUser,
         date: new Date(),
         message: action.message,
-      };
-      let objectMessage = [...currentDialog[0].messages, newMessage];
+      }; // Создаем обьект с новым сообщением
+      let objectMessage = [...currentDialog[0].messages, newMessage]; // Копируем массив обьектов старых сообщений и добавляем новый обьект в массив
       let objectDialogMessage = {
         idDialog: action.idDialog,
         idUser: action.idUser,
         messages: objectMessage,
-      };
-      let copyMessages = [...state.messages];
-      copyMessages.splice(searchIndexMessage, 1, objectDialogMessage);
+      }; // Создаем обьект с id и добавляем в него обьект со старыми и новым сообщением
+      let copyMessages = [...state.messages]; // Создаем копию массива обьектов с сообщениями
+      copyMessages.splice(searchIndexMessage, 1, objectDialogMessage); // Удаляем старую версию обьекта с сообщением и на ее место вставляем обьект с новым сообщением
 
       return {
         ...state,

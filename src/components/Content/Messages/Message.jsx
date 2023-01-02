@@ -19,7 +19,7 @@ const WrapperMessage = styled.div`
     clear: both;
   }
   .date {
-    font-size: var(--fs-xs);
+    font-size: 8px;
     color: var(--color-text-sub);
   }
   .date_left {

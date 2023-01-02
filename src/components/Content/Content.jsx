@@ -1,16 +1,15 @@
+import { useRef } from "react";
 import { connect } from "react-redux";
-import { chooseCurrentDialog, updateDialogs } from "../../redux/dialogsReducer";
-import EnterMessege from "./EnterMessage";
-import HeaderContent from "./HeaderContent";
-import MessagesContainer from "./Messages/MessagesContainer";
-import Preloader from "./../Common/Preloader";
-import styled from "styled-components";
 import {
   addNewMessage,
   changeTextValueMessage,
   messagesCombine,
 } from "../../redux/messagesReducer";
-import { useRef } from "react";
+import { chooseCurrentDialog, updateDialogs } from "../../redux/dialogsReducer";
+import EnterMessege from "./EnterMessage";
+import HeaderContent from "./HeaderContent";
+import MessagesContainer from "./Messages/MessagesContainer";
+import styled from "styled-components";
 
 const ContentWrapper = styled.div`
   background-color: var(--color-aditional);
@@ -20,16 +19,16 @@ const ContentWrapper = styled.div`
 `;
 
 const ContentComponent = (props) => {
-  // Scroll to last message
-  let scrollContainer = useRef(null); // Change scroll container
+  // Скролл к последнему сообщению
+  let scrollContainer = useRef(null); // Выбор контейнера который нужно скролить
   if (scrollContainer.current !== null) {
     setTimeout(function () {
       scrollContainer.current.scrollTo(0, scrollContainer.current.scrollHeight);
-    }, 100);
+    }, 100); // Задержка для скролла, нужна так как сначала происходит скролл к концу контейнера а потом добавление сообщения из за чего последнее сообщение не видно после рендера на странице.
   }
   return (
     <ContentWrapper>
-      {props.authorizedUser.length > 0 && props.currentDialog ? (
+      {props.currentDialog ? (
         <>
           <HeaderContent
             setOpenRightAside={props.setOpenRightAside}

@@ -1,13 +1,13 @@
 import { useEffect, useState } from "react";
+import { useNavigate } from "react-router";
 import { Routes, Route } from "react-router-dom";
+import { connect } from "react-redux";
 import { Content } from "./components/Content/Content";
 import { LeftAside } from "./components/LeftAside/LeftAside";
 import { RightAside } from "./components/RightAside/RightAside";
-import styled from "styled-components";
 import { Authorization } from "./components/Authorization/Authorization";
-import { connect } from "react-redux";
-import { useNavigate } from "react-router";
 import { Menu } from "./components/Menu/Menu";
+import styled from "styled-components";
 
 const WrapperApp = styled.div`
   height: 100vh;
@@ -16,8 +16,9 @@ const WrapperApp = styled.div`
 `;
 
 const AppComponent = (props) => {
-  let [openRightAside, setOpenRightAside] = useState(false);
-  let [openMenu, setOpenMenu] = useState(false);
+  let [openRightAside, setOpenRightAside] = useState(false); // Открыть панель с информацией о пользователе
+  let [openMenu, setOpenMenu] = useState(false); // Открыть навигационную панель
+  // Редирект с помощью хука useNavigate (react-router)
   let navigate = useNavigate();
   useEffect(() => {
     if (props.authorizedUser.length === 0) {

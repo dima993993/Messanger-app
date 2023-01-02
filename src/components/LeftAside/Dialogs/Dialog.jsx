@@ -1,5 +1,5 @@
 import { NavLink } from "react-router-dom";
-import UserPhoto from "./../Common/UserPhoto";
+import UserPhoto from "./../../Common/UserPhoto";
 import styled from "styled-components";
 
 const DialogWrapper = styled.div`
@@ -41,6 +41,7 @@ const Dialog = ({
   chooseCurrentDialogUserInfo,
   messagesCombine,
 }) => {
+  // Обрезаем сообщение которое отображается в списке диалогов
   let cutLastMessage =
     dialog.lastMessage.length > 20
       ? dialog.lastMessage.slice(0, 20) + "..."
@@ -50,11 +51,11 @@ const Dialog = ({
     <DialogWrapper>
       <NavLink
         to={`/dialog/${dialog.idDialog}`}
-        className={(state) => (state.isActive ? "active-link" : "")}
+        className={(state) => (state.isActive ? "active-link" : "")} // Выделяем активный диалог
         onClick={() => {
-          chooseCurrentDialog(dialog);
-          chooseCurrentDialogUserInfo(userInfo);
-          messagesCombine(dialog.idDialog);
+          chooseCurrentDialog(dialog); // Выбираем диалог который  нужно отобразить
+          chooseCurrentDialogUserInfo(userInfo); // Выбираем информацию о пользователе с диалогов
+          messagesCombine(dialog.idDialog); // Обьединяем сообщения 2х пользователей в один диалог
         }}>
         <div>
           <UserPhoto

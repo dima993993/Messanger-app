@@ -17,12 +17,13 @@ const usersReducer = (state = initialState, action) => {
         (user) =>
           user.authorization.login === action.login &&
           user.authorization.password === action.password
-      );
+      ); // Ищем пользователя с заданым логином и паролем
       localStorage.setItem("authUser", JSON.stringify(checkUser));
       return {
         ...state,
         authorizedUser: checkUser,
       };
+
     default:
       return state;
   }

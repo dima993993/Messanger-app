@@ -1,12 +1,11 @@
-import { useEffect } from "react";
-import { NavLink } from "react-router-dom";
-import { useNavigate } from "react-router";
 import { connect } from "react-redux";
-import styled from "styled-components";
+import { NavLink } from "react-router-dom";
 import { useField } from "../../hooks/validation";
+import { authorization } from "../../redux/usersReducer";
 import Button from "./../Common/Button";
 import Field from "../Common/Field";
-import { authorization } from "../../redux/usersReducer";
+import styled from "styled-components";
+import { useState } from "react";
 
 const WrapperAuthorized = styled.div`
   position: absolute;
@@ -38,40 +37,48 @@ const WrapperAuthorized = styled.div`
 `;
 
 const AuthorizationComponent = (props) => {
+  // Правила валидации для каждого поля
   let login = useField("", { isEmpty: true, minLength: 9, maxLength: 13 });
   let password = useField("", { isEmpty: true, minLength: 6, maxLength: 10 });
+  console.log(props);
+  let [userAuth, setUserAuth] = useState("");
 
   return (
     <WrapperAuthorized>
-      <div className="position_container">
+      <div className='position_container'>
+        <div className='error_container'>{userAuth}</div>
         <form>
           <Field
-            name="login"
-            type="text"
-            nameField="Login"
-            placeholder="Enter Login"
+            name='login'
+            type='text'
+            nameField='Login'
+            placeholder='Enter Login'
             allSettings={login}
           />
           <Field
-            name="password"
-            type="password"
-            nameField="Password"
-            placeholder="Enter Password"
+            name='password'
+            type='password'
+            nameField='Password'
+            placeholder='Enter Password'
             allSettings={password}
           />
         </form>
         <div
-          className="btn_login"
+          className='btn_login'
           onClick={() => {
+            if (props.authorizedUser.length === 0) {
+              setUserAuth("Не верно введен пароль или логин");
+            } else {
+              setUserAuth("");
+            }
             props.authorization(login.value, password.value);
             login.setValue("");
             password.setValue("");
-          }}
-        >
-          <Button text="Login" />
+          }}>
+          <Button text='Login' />
         </div>
-        <div className="registration_link">
-          <NavLink to="/registration">Registration</NavLink>
+        <div className='registration_link'>
+          <NavLink to='/registration'>Registration</NavLink>
         </div>
         <div>Google</div>
       </div>
