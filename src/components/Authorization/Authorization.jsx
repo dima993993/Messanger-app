@@ -17,6 +17,7 @@ const WrapperAuthorized = styled.div`
   display: flex;
   justify-content: center;
   align-items: center;
+  z-index: 9999;
   .position_container {
     width: var(--width-field);
   }
@@ -40,7 +41,6 @@ const AuthorizationComponent = (props) => {
   // Правила валидации для каждого поля
   let login = useField("", { isEmpty: true, minLength: 9, maxLength: 13 });
   let password = useField("", { isEmpty: true, minLength: 6, maxLength: 10 });
-  console.log(props);
   let [userAuth, setUserAuth] = useState("");
 
   return (

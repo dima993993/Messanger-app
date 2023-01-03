@@ -1,14 +1,16 @@
 import { connect } from "react-redux";
-import HeaderLeftAside from "./HeaderLeftAside";
-import styled from "styled-components";
+import { messagesCombine } from "../../redux/messagesReducer";
 import {
   chooseCurrentDialog,
   chooseCurrentDialogUserInfo,
+  getListDialogs,
   searchFieldValue,
 } from "../../redux/dialogsReducer";
-import { messagesCombine } from "../../redux/messagesReducer";
-import DialogsContainer from "./Dialogs/DialogsContainer";
 import { chooseCurrentUser } from "../../redux/usersReducer";
+import DialogsContainer from "./Dialogs/DialogsContainer";
+import HeaderLeftAside from "./HeaderLeftAside";
+import styled from "styled-components";
+import { useEffect } from "react";
 
 const LeftAsideWrapper = styled.div`
   background-color: var(--color-basic);
@@ -32,6 +34,7 @@ const LeftAsideWrapper = styled.div`
 
 const LeftAsideComponent = (props) => {
   if (props.authorizedUser.length === 0) return null; // Проверка на авторизованного пользователя
+
   return (
     <LeftAsideWrapper>
       <HeaderLeftAside
@@ -40,7 +43,14 @@ const LeftAsideComponent = (props) => {
         setOpenMenu={props.setOpenMenu}
       />
       <div className='left_aside_container'>
-        <DialogsContainer {...props} />
+        <DialogsContainer
+          authorizedUser={props.authorizedUser}
+          chooseCurrentDialog={props.chooseCurrentDialog}
+          chooseCurrentDialogUserInfo={props.chooseCurrentDialogUserInfo}
+          messagesCombine={props.messagesCombine}
+          dialogs={props.dialogs}
+          chooseCurrentUser={props.chooseCurrentUser}
+        />
       </div>
     </LeftAsideWrapper>
   );
@@ -51,12 +61,15 @@ const mapStateToProps = (state) => {
     dialogs: state.dialogsReducer.dialogs,
     authorizedUser: state.usersReducer.authorizedUser,
     fieldValue: state.dialogsReducer.fieldValue,
+    users: state.usersReducer.users,
   };
 };
+
 export const LeftAside = connect(mapStateToProps, {
   chooseCurrentDialog,
   chooseCurrentDialogUserInfo,
   messagesCombine,
   searchFieldValue,
   chooseCurrentUser,
+  getListDialogs,
 })(LeftAsideComponent);

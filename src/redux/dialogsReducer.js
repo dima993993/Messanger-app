@@ -4,6 +4,7 @@ const CURRENT_DIALOG = "CURRENT_DIALOG";
 const CURRENT_DIALOG_USER_INFO = "CURRENT_DIALOG_USER_INFO";
 const SEARCH_FIELD_VALUE = "SEARCH_FIELD_VALUE";
 const UPDATE_DIALOG = "UPDATE_DIALOG";
+const GET_LIST_DIALOGS = "GET_LIST_DIALOGS";
 
 const initialState = {
   dialogs: dialogs,
@@ -45,6 +46,22 @@ const dialogsReducer = (state = initialState, action) => {
         ...state,
         dialogs: cloneDialogs,
       };
+    case GET_LIST_DIALOGS:
+      let copyDialogs = [...state.dialogs];
+      let filterDialogs = copyDialogs.filter((dialog) => {
+        delete dialog.userInfo[action.authUserId];
+        let obj = Object.keys(dialog.userInfo);
+        if (obj.length === 1) {
+          let newObj = dialog.userInfo[obj[0]];
+          dialog.userInfo = newObj;
+          return dialog;
+        }
+      });
+
+      return {
+        ...state,
+        dialogs: filterDialogs,
+      };
     default:
       return state;
   }
@@ -70,6 +87,10 @@ export const updateDialogs = (idDialog, lastMessage, date) => ({
   idDialog,
   lastMessage,
   date,
+});
+export const getListDialogs = (authUserId) => ({
+  type: GET_LIST_DIALOGS,
+  authUserId,
 });
 
 export default dialogsReducer;

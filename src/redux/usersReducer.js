@@ -1,6 +1,7 @@
 import users from "./../server/users";
 
 const USER_AUTHORIZATION = "USER_AUTHORIZATION";
+const LOG_OUT = "LOG_OUT";
 const CHOOSE_CURRENT_USER = "CHOOSE_CURRENT_USER";
 
 const getAuthUser = localStorage.getItem("authUser");
@@ -37,6 +38,13 @@ const usersReducer = (state = initialState, action) => {
         ...state,
         currentUser: findCurrentUser,
       };
+    case LOG_OUT: {
+      localStorage.setItem("authUser", JSON.stringify([]));
+      return {
+        ...state,
+        authorizedUser: [],
+      };
+    }
     default:
       return state;
   }
@@ -54,4 +62,5 @@ export const chooseCurrentUser = (arrayUsersId, userId) => ({
   arrayUsersId,
   userId,
 });
+export const logOut = () => ({ type: LOG_OUT });
 export default usersReducer;

@@ -26,6 +26,7 @@ const ContentComponent = (props) => {
       scrollContainer.current.scrollTo(0, scrollContainer.current.scrollHeight);
     }, 100); // Задержка для скролла, нужна так как сначала происходит скролл к концу контейнера а потом добавление сообщения из за чего последнее сообщение не видно после рендера на странице.
   }
+  if (props.authorizedUser.length === 0) return null;
   return (
     <ContentWrapper>
       {props.currentDialog ? (

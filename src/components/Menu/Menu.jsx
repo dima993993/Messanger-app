@@ -1,10 +1,15 @@
 import { useState } from "react";
 import { connect } from "react-redux";
-import { faGear, faSearch } from "@fortawesome/free-solid-svg-icons";
+import {
+  faGear,
+  faSearch,
+  faArrowRightFromBracket,
+} from "@fortawesome/free-solid-svg-icons";
 import MenuItem from "./MenuItem";
 import styled from "styled-components";
 import MenuHeader from "./MenuHeader";
 import { switchTheme } from "../../redux/supportReducer";
+import { logOut } from "../../redux/usersReducer";
 
 const MenuWrapper = styled.div`
   width: var(--width-aside);
@@ -45,6 +50,13 @@ const MenuComponent = ({ openMenu, setOpenMenu, ...props }) => {
           </div>
           <MenuItem nameItem='Search User' icon={faSearch} />
           <MenuItem nameItem='Settings' icon={faGear} />
+          <div
+            onClick={() => {
+              props.logOut();
+              setOpenMenu(false);
+            }}>
+            <MenuItem nameItem='Log Out' icon={faArrowRightFromBracket} />
+          </div>
         </div>
       </MenuWrapper>
     </>
@@ -58,4 +70,7 @@ const mapStateToProps = (state) => {
   };
 };
 
-export const Menu = connect(mapStateToProps, { switchTheme })(MenuComponent);
+export const Menu = connect(mapStateToProps, {
+  switchTheme,
+  logOut,
+})(MenuComponent);

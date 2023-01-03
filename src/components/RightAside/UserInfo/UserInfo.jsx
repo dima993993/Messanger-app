@@ -1,8 +1,13 @@
-import styled from "styled-components";
 import PhotoBlock from "./PhotoBlock";
+import UserInfoItem from "./UserInfoItem";
+import styled from "styled-components";
+import {
+  faPhone,
+  faCircleInfo,
+  faSignature,
+} from "@fortawesome/free-solid-svg-icons";
 const WrapperUserInfo = styled.div``;
 const UserInfo = ({ profile }) => {
-  console.log(profile);
   return (
     <WrapperUserInfo>
       <PhotoBlock
@@ -10,7 +15,23 @@ const UserInfo = ({ profile }) => {
         firstName={profile.firstName}
         lastName={profile.lastName}
       />
-      <div>User Info</div>
+      <div>
+        <UserInfoItem
+          profileText={profile.phone}
+          nameItem={"Телефон"}
+          icon={faPhone}
+        />
+        <UserInfoItem
+          profileText={profile.nicName}
+          nameItem={"Псевдоним"}
+          icon={faSignature}
+        />
+        <UserInfoItem
+          profileText={profile.aboutMe}
+          nameItem={"О себе"}
+          icon={faCircleInfo}
+        />
+      </div>
     </WrapperUserInfo>
   );
 };

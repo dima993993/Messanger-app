@@ -44,7 +44,8 @@ const users = [
       nicName: "Apofis",
       phone: "+3809911111111",
       photo: "",
-      aboutMe: "01010101010101010101",
+      aboutMe:
+        "Lorem Lorem Lorem Lorem Lorem Lorem Lorem Lorem Lorem Lorem Lorem Lorem Lorem Lorem Lorem Lorem Lorem Lorem Lorem Lorem Lorem",
     },
     chats: [1002],
   },

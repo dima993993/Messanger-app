@@ -1,5 +1,5 @@
-import styled from "styled-components";
 import Dialog from "./Dialog";
+import styled from "styled-components";
 const WrapperDialogsContainer = styled.div``;
 const DialogsContainer = ({
   authorizedUser,
@@ -16,6 +16,7 @@ const DialogsContainer = ({
       dialogs.filter((dialog) => dialog.idDialog === chat)
     );
   }
+
   return (
     <WrapperDialogsContainer>
       <div>
@@ -25,6 +26,7 @@ const DialogsContainer = ({
             +objUsers[0] === authorizedUser[0].idUser
               ? objUsers[1]
               : objUsers[0];
+
           return (
             <Dialog
               key={index}
