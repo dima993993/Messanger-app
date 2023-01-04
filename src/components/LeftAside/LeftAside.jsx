@@ -1,4 +1,4 @@
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import { connect } from "react-redux";
 import { messagesCombine } from "../../redux/messagesReducer";
 import {
@@ -11,6 +11,7 @@ import DialogsContainer from "./Dialogs/DialogsContainer";
 import HeaderLeftAside from "./HeaderLeftAside";
 import styled from "styled-components";
 import { filterForSearch } from "../../helpers/filterForSearch";
+import UsersContainer from "./Users/UsersContainer";
 
 const LeftAsideWrapper = styled.div`
   background-color: var(--color-basic);
@@ -39,6 +40,31 @@ const LeftAsideComponent = (props) => {
     }
   }, [props.authorizedUser]);
   if (props.authorizedUser.length === 0) return null; // Проверка на авторизованного пользователя
+  let switchLeftAside = () => {
+    switch (props.stateLeftAside) {
+      case "searchUser":
+        return (
+          <UsersContainer
+            users={filterForSearch(props.users, props.fieldValue, "profile")}
+            authorizedUser={props.authorizedUser[0]}
+          />
+        );
+      default:
+        return (
+          <DialogsContainer
+            authorizedUser={props.authorizedUser}
+            chooseCurrentDialog={props.chooseCurrentDialog}
+            messagesCombine={props.messagesCombine}
+            dialogs={filterForSearch(
+              props.myDialogs,
+              props.fieldValue,
+              "userInfo"
+            )}
+            chooseCurrentUser={props.chooseCurrentUser}
+          />
+        );
+    }
+  };
 
   return (
     <LeftAsideWrapper>
@@ -46,20 +72,9 @@ const LeftAsideComponent = (props) => {
         searchFieldValue={props.searchFieldValue}
         fieldValue={props.fieldValue}
         setOpenMenu={props.setOpenMenu}
+        setStateLeftAside={props.setStateLeftAside}
       />
-      <div className='left_aside_container'>
-        <DialogsContainer
-          authorizedUser={props.authorizedUser}
-          chooseCurrentDialog={props.chooseCurrentDialog}
-          messagesCombine={props.messagesCombine}
-          dialogs={filterForSearch(
-            props.myDialogs,
-            props.fieldValue,
-            "userInfo"
-          )}
-          chooseCurrentUser={props.chooseCurrentUser}
-        />
-      </div>
+      <div className='left_aside_container'>{switchLeftAside()}</div>
     </LeftAsideWrapper>
   );
 };
@@ -71,6 +86,7 @@ const mapStateToProps = (state) => {
     fieldValue: state.dialogsReducer.fieldValue,
     users: state.usersReducer.users,
     myDialogs: state.dialogsReducer.myDialogs,
+    stateLeftAside: state.supportReducer.stateLeftAside,
   };
 };
 

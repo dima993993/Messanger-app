@@ -7,7 +7,7 @@ import {
 import MenuItem from "./MenuItem";
 import styled from "styled-components";
 import MenuHeader from "./MenuHeader";
-import { switchTheme } from "../../redux/supportReducer";
+import { setStateLeftAside, switchTheme } from "../../redux/supportReducer";
 import { chooseCurrentUser, logOut } from "../../redux/usersReducer";
 import { chooseCurrentDialog } from "../../redux/dialogsReducer";
 
@@ -48,7 +48,9 @@ const MenuComponent = ({ openMenu, setOpenMenu, ...props }) => {
               switchTheme={props.switchTheme}
             />
           </div>
-          <MenuItem nameItem='Search User' icon={faSearch} />
+          <div onClick={() => props.setStateLeftAside("searchUser")}>
+            <MenuItem nameItem='Search User' icon={faSearch} />
+          </div>
           <MenuItem nameItem='Settings' icon={faGear} />
           <div
             onClick={() => {
@@ -71,9 +73,11 @@ const mapStateToProps = (state) => {
     theme: state.supportReducer.theme,
   };
 };
+
 export const Menu = connect(mapStateToProps, {
   switchTheme,
   logOut,
   chooseCurrentDialog,
   chooseCurrentUser,
+  setStateLeftAside,
 })(MenuComponent);
