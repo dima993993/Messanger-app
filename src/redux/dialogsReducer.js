@@ -1,7 +1,6 @@
 import dialogs from "./../server/dialogs";
 
 const CURRENT_DIALOG = "CURRENT_DIALOG";
-const CURRENT_DIALOG_USER_INFO = "CURRENT_DIALOG_USER_INFO";
 const SEARCH_FIELD_VALUE = "SEARCH_FIELD_VALUE";
 const UPDATE_DIALOG = "UPDATE_DIALOG";
 const GET_LIST_DIALOGS = "GET_LIST_DIALOGS";
@@ -9,8 +8,8 @@ const GET_LIST_DIALOGS = "GET_LIST_DIALOGS";
 const initialState = {
   dialogs: dialogs,
   currentDialog: null,
-  currentDialogUserInfo: null,
   fieldValue: "",
+  myDialogs: [],
 };
 
 const dialogsReducer = (state = initialState, action) => {
@@ -19,11 +18,6 @@ const dialogsReducer = (state = initialState, action) => {
       return {
         ...state,
         currentDialog: action.dialog,
-      };
-    case CURRENT_DIALOG_USER_INFO:
-      return {
-        ...state,
-        currentDialogUserInfo: action.userInfo,
       };
     case SEARCH_FIELD_VALUE:
       return {
@@ -47,20 +41,21 @@ const dialogsReducer = (state = initialState, action) => {
         dialogs: cloneDialogs,
       };
     case GET_LIST_DIALOGS:
-      let copyDialogs = [...state.dialogs];
+      let copyDialogs = JSON.parse(JSON.stringify(state.dialogs));
       let filterDialogs = copyDialogs.filter((dialog) => {
         delete dialog.userInfo[action.authUserId];
         let obj = Object.keys(dialog.userInfo);
         if (obj.length === 1) {
-          let newObj = dialog.userInfo[obj[0]];
-          dialog.userInfo = newObj;
+          dialog.userInfo = dialog.userInfo[obj[0]];
+          dialog.userInfo.idUser = +obj[0];
           return dialog;
         }
       });
+      console.log(filterDialogs);
 
       return {
         ...state,
-        dialogs: filterDialogs,
+        myDialogs: filterDialogs,
       };
     default:
       return state;
@@ -73,10 +68,7 @@ export const chooseCurrentDialog = (dialog) => ({
   type: CURRENT_DIALOG,
   dialog,
 });
-export const chooseCurrentDialogUserInfo = (userInfo) => ({
-  type: CURRENT_DIALOG_USER_INFO,
-  userInfo,
-});
+
 export const searchFieldValue = (textValue) => ({
   type: SEARCH_FIELD_VALUE,
   textValue,

@@ -1,8 +1,8 @@
+import { useEffect } from "react";
 import { connect } from "react-redux";
 import { messagesCombine } from "../../redux/messagesReducer";
 import {
   chooseCurrentDialog,
-  chooseCurrentDialogUserInfo,
   getListDialogs,
   searchFieldValue,
 } from "../../redux/dialogsReducer";
@@ -10,7 +10,6 @@ import { chooseCurrentUser } from "../../redux/usersReducer";
 import DialogsContainer from "./Dialogs/DialogsContainer";
 import HeaderLeftAside from "./HeaderLeftAside";
 import styled from "styled-components";
-import { useEffect } from "react";
 
 const LeftAsideWrapper = styled.div`
   background-color: var(--color-basic);
@@ -33,8 +32,12 @@ const LeftAsideWrapper = styled.div`
 `;
 
 const LeftAsideComponent = (props) => {
+  useEffect(() => {
+    if (props.authorizedUser.length > 0) {
+      props.getListDialogs(props.authorizedUser[0].idUser);
+    }
+  }, [props.authorizedUser]);
   if (props.authorizedUser.length === 0) return null; // Проверка на авторизованного пользователя
-
   return (
     <LeftAsideWrapper>
       <HeaderLeftAside
@@ -46,9 +49,8 @@ const LeftAsideComponent = (props) => {
         <DialogsContainer
           authorizedUser={props.authorizedUser}
           chooseCurrentDialog={props.chooseCurrentDialog}
-          chooseCurrentDialogUserInfo={props.chooseCurrentDialogUserInfo}
           messagesCombine={props.messagesCombine}
-          dialogs={props.dialogs}
+          dialogs={props.myDialogs}
           chooseCurrentUser={props.chooseCurrentUser}
         />
       </div>
@@ -62,12 +64,12 @@ const mapStateToProps = (state) => {
     authorizedUser: state.usersReducer.authorizedUser,
     fieldValue: state.dialogsReducer.fieldValue,
     users: state.usersReducer.users,
+    myDialogs: state.dialogsReducer.myDialogs,
   };
 };
 
 export const LeftAside = connect(mapStateToProps, {
   chooseCurrentDialog,
-  chooseCurrentDialogUserInfo,
   messagesCombine,
   searchFieldValue,
   chooseCurrentUser,

@@ -16,6 +16,9 @@ const WrapperApp = styled.div`
 `;
 
 const AppComponent = (props) => {
+  // Изменение темы
+  let body = document.querySelector("body");
+  body.setAttribute("data-theme", props.theme);
   let [openRightAside, setOpenRightAside] = useState(false); // Открыть панель с информацией о пользователе
   let [openMenu, setOpenMenu] = useState(false); // Открыть навигационную панель
   // Редирект с помощью хука useNavigate (react-router)
@@ -52,6 +55,7 @@ const AppComponent = (props) => {
 const mapStateToProps = (state) => {
   return {
     authorizedUser: state.usersReducer.authorizedUser,
+    theme: state.supportReducer.theme,
   };
 };
 const App = connect(mapStateToProps, {})(AppComponent);

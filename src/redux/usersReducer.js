@@ -27,12 +27,8 @@ const usersReducer = (state = initialState, action) => {
         authorizedUser: checkUser,
       };
     case CHOOSE_CURRENT_USER:
-      let findIdCurrentUser =
-        +action.arrayUsersId[0] === +action.userId
-          ? action.arrayUsersId[1]
-          : action.arrayUsersId[0];
       let findCurrentUser = state.users.filter(
-        (user) => user.idUser === +findIdCurrentUser
+        (user) => user.idUser === action.idUser
       );
       return {
         ...state,
@@ -57,10 +53,9 @@ export const authorization = (login, password) => ({
   login,
   password,
 });
-export const chooseCurrentUser = (arrayUsersId, userId) => ({
+export const chooseCurrentUser = (idUser) => ({
   type: CHOOSE_CURRENT_USER,
-  arrayUsersId,
-  userId,
+  idUser,
 });
 export const logOut = () => ({ type: LOG_OUT });
 export default usersReducer;

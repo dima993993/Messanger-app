@@ -4,42 +4,26 @@ const WrapperDialogsContainer = styled.div``;
 const DialogsContainer = ({
   authorizedUser,
   chooseCurrentDialog,
-  chooseCurrentDialogUserInfo,
   messagesCombine,
   dialogs,
   chooseCurrentUser,
 }) => {
-  // Получаем список диалогов авторизованного пользователя
-  let changeDialogs;
-  if (authorizedUser.length > 0) {
-    changeDialogs = authorizedUser[0].chats.map((chat) =>
-      dialogs.filter((dialog) => dialog.idDialog === chat)
-    );
-  }
-
   return (
     <WrapperDialogsContainer>
       <div>
-        {changeDialogs.map((dialog, index) => {
-          let objUsers = Object.keys(dialog[0].userInfo);
-          let rules =
-            +objUsers[0] === authorizedUser[0].idUser
-              ? objUsers[1]
-              : objUsers[0];
-
+        {dialogs.map((dialog, index) => {
+          let getDate = dialog.date.split("T");
+          let time = getDate[1].split(":");
           return (
             <Dialog
               key={index}
-              dialog={dialog[0]}
+              dialog={dialog}
               chooseCurrentDialog={chooseCurrentDialog}
-              userInfo={dialog[0].userInfo[rules]}
-              date={
-                dialog[0].date.getHours() + ":" + dialog[0].date.getMinutes()
-              }
-              chooseCurrentDialogUserInfo={chooseCurrentDialogUserInfo}
+              userInfo={dialog.userInfo}
+              date={time[0] + ":" + time[1]}
               messagesCombine={messagesCombine}
               chooseCurrentUser={chooseCurrentUser}
-              authUserId={authorizedUser[0].idUser}
+              authUserId={authorizedUser.idUser}
             />
           );
         })}

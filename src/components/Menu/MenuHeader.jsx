@@ -24,8 +24,6 @@ const WrapperMenuHeader = styled.div`
   }
 `;
 const MenuHeader = ({ profile, theme, switchTheme }) => {
-  let body = document.querySelector("body");
-  body.setAttribute("data-theme", theme);
   return (
     <WrapperMenuHeader>
       <div className='user'>

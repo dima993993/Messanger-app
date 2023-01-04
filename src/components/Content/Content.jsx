@@ -19,21 +19,22 @@ const ContentWrapper = styled.div`
 `;
 
 const ContentComponent = (props) => {
-  // Скролл к последнему сообщению
   let scrollContainer = useRef(null); // Выбор контейнера который нужно скролить
+  if (props.authorizedUser.length === 0) return null; // Проверка на авторизованного пользователя
+  // Скролл к последнему сообщению
   if (scrollContainer.current !== null) {
     setTimeout(function () {
       scrollContainer.current.scrollTo(0, scrollContainer.current.scrollHeight);
     }, 100); // Задержка для скролла, нужна так как сначала происходит скролл к концу контейнера а потом добавление сообщения из за чего последнее сообщение не видно после рендера на странице.
   }
-  if (props.authorizedUser.length === 0) return null;
+
   return (
     <ContentWrapper>
       {props.currentDialog ? (
         <>
           <HeaderContent
             setOpenRightAside={props.setOpenRightAside}
-            userInfo={props.currentDialogUserInfo}
+            userInfo={props.currentDialog.userInfo}
           />
           <MessagesContainer
             messages={props.combineMessage}
@@ -61,7 +62,6 @@ const mapStateToProps = (state) => {
   return {
     dialogs: state.dialogsReducer.dialogs,
     currentDialog: state.dialogsReducer.currentDialog,
-    currentDialogUserInfo: state.dialogsReducer.currentDialogUserInfo,
     combineMessage: state.messagesReducer.combineMessage,
     authorizedUser: state.usersReducer.authorizedUser,
     messageTextValue: state.messagesReducer.messageTextValue,

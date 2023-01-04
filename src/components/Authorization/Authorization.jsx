@@ -6,6 +6,7 @@ import Button from "./../Common/Button";
 import Field from "../Common/Field";
 import styled from "styled-components";
 import { useState } from "react";
+import { getListDialogs } from "../../redux/dialogsReducer";
 
 const WrapperAuthorized = styled.div`
   position: absolute;
@@ -42,7 +43,6 @@ const AuthorizationComponent = (props) => {
   let login = useField("", { isEmpty: true, minLength: 9, maxLength: 13 });
   let password = useField("", { isEmpty: true, minLength: 6, maxLength: 10 });
   let [userAuth, setUserAuth] = useState("");
-
   return (
     <WrapperAuthorized>
       <div className='position_container'>
@@ -92,6 +92,8 @@ const mapStateToProps = (state) => {
     authorizedUser: state.usersReducer.authorizedUser,
   };
 };
-export const Authorization = connect(mapStateToProps, { authorization })(
-  AuthorizationComponent
-);
+
+export const Authorization = connect(mapStateToProps, {
+  authorization,
+  getListDialogs,
+})(AuthorizationComponent);

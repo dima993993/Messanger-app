@@ -20,7 +20,7 @@ const HeaderContentWrapper = styled.div`
 const HeaderContent = ({ setOpenRightAside, userInfo }) => {
   return (
     <HeaderContentWrapper>
-      <div className="user" onClick={() => setOpenRightAside(true)}>
+      <div className='user' onClick={() => setOpenRightAside(true)}>
         <UserPhoto
           photo={userInfo.photo}
           firstName={userInfo.firstName}
@@ -29,7 +29,7 @@ const HeaderContent = ({ setOpenRightAside, userInfo }) => {
 
         <div>{userInfo.firstName + " " + userInfo.lastName}</div>
       </div>
-      <div className="menu"></div>
+      <div className='menu'></div>
     </HeaderContentWrapper>
   );
 };

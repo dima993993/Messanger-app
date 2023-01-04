@@ -1,4 +1,3 @@
-import { useState } from "react";
 import { connect } from "react-redux";
 import {
   faGear,
@@ -9,7 +8,8 @@ import MenuItem from "./MenuItem";
 import styled from "styled-components";
 import MenuHeader from "./MenuHeader";
 import { switchTheme } from "../../redux/supportReducer";
-import { logOut } from "../../redux/usersReducer";
+import { chooseCurrentUser, logOut } from "../../redux/usersReducer";
+import { chooseCurrentDialog } from "../../redux/dialogsReducer";
 
 const MenuWrapper = styled.div`
   width: var(--width-aside);
@@ -53,6 +53,8 @@ const MenuComponent = ({ openMenu, setOpenMenu, ...props }) => {
           <div
             onClick={() => {
               props.logOut();
+              props.chooseCurrentDialog(null);
+              props.chooseCurrentUser([]);
               setOpenMenu(false);
             }}>
             <MenuItem nameItem='Log Out' icon={faArrowRightFromBracket} />
@@ -69,8 +71,9 @@ const mapStateToProps = (state) => {
     theme: state.supportReducer.theme,
   };
 };
-
 export const Menu = connect(mapStateToProps, {
   switchTheme,
   logOut,
+  chooseCurrentDialog,
+  chooseCurrentUser,
 })(MenuComponent);
