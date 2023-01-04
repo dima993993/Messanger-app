@@ -10,6 +10,7 @@ import { chooseCurrentUser } from "../../redux/usersReducer";
 import DialogsContainer from "./Dialogs/DialogsContainer";
 import HeaderLeftAside from "./HeaderLeftAside";
 import styled from "styled-components";
+import { filterForSearch } from "../../helpers/filterForSearch";
 
 const LeftAsideWrapper = styled.div`
   background-color: var(--color-basic);
@@ -38,6 +39,7 @@ const LeftAsideComponent = (props) => {
     }
   }, [props.authorizedUser]);
   if (props.authorizedUser.length === 0) return null; // Проверка на авторизованного пользователя
+
   return (
     <LeftAsideWrapper>
       <HeaderLeftAside
@@ -50,7 +52,11 @@ const LeftAsideComponent = (props) => {
           authorizedUser={props.authorizedUser}
           chooseCurrentDialog={props.chooseCurrentDialog}
           messagesCombine={props.messagesCombine}
-          dialogs={props.myDialogs}
+          dialogs={filterForSearch(
+            props.myDialogs,
+            props.fieldValue,
+            "userInfo"
+          )}
           chooseCurrentUser={props.chooseCurrentUser}
         />
       </div>
