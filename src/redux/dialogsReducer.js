@@ -4,6 +4,10 @@ const CURRENT_DIALOG = "CURRENT_DIALOG";
 const SEARCH_FIELD_VALUE = "SEARCH_FIELD_VALUE";
 const UPDATE_DIALOG = "UPDATE_DIALOG";
 const GET_LIST_DIALOGS = "GET_LIST_DIALOGS";
+const ADD_NEW_DIALOG = "ADD_NEW_DIALOG";
+const SORT_DIALOGS = "SORT_DIALOGS";
+
+export let createDialogId = 3000;
 
 const initialState = {
   dialogs: dialogs,
@@ -51,11 +55,28 @@ const dialogsReducer = (state = initialState, action) => {
           return dialog;
         }
       });
-      console.log(filterDialogs);
-
       return {
         ...state,
         myDialogs: filterDialogs,
+      };
+    case ADD_NEW_DIALOG:
+      let newDialog = {
+        idDialog: ++createDialogId,
+        lastMessage: "",
+        date: new Date(),
+        userInfo: {},
+      };
+      newDialog.userInfo[action.idAuthUser] = action.userInfoAuthUser;
+      newDialog.userInfo[action.idUser] = action.userInfo;
+      return {
+        ...state,
+        dialogs: [...state.dialogs, newDialog],
+      };
+    case SORT_DIALOGS:
+      let sortDialogs = [...state.myDialogs].sort((a, b) => b.date - a.date);
+      return {
+        ...state,
+        myDialogs: sortDialogs,
       };
     default:
       return state;
@@ -84,5 +105,13 @@ export const getListDialogs = (authUserId) => ({
   type: GET_LIST_DIALOGS,
   authUserId,
 });
+export const addNewDialog = (
+  idAuthUser,
+  userInfoAuthUser,
+  idUser,
+  userInfo
+) => ({ type: ADD_NEW_DIALOG, idAuthUser, userInfoAuthUser, idUser, userInfo });
+
+export const sortDialogs = () => ({ type: SORT_DIALOGS });
 
 export default dialogsReducer;

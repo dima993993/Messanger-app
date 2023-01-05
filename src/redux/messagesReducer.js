@@ -3,6 +3,7 @@ import messages from "../server/messages";
 const COMBINE_MESSAGE = "COMBINE_MESSAGE";
 const CHANGE_TEXT_VALUE_MESSAGE = "CHANGE_TEXT_VALUE_MESSAGE";
 const ADD_NEW_MESSAGE = "ADD_NEW_MESSAGE";
+const NEW_CHAT = "NEW_CHAT";
 
 const initialState = {
   messages: messages,
@@ -59,7 +60,16 @@ const messagesReducer = (state = initialState, action) => {
         ...state,
         messages: copyMessages,
       };
-
+    case NEW_CHAT:
+      let newChats = {
+        idDialog: action.idDialog,
+        idUser: action.idUser,
+        messages: [],
+      };
+      return {
+        ...state,
+        messages: [...state.messages, newChats],
+      };
     default:
       return state;
   }
@@ -78,6 +88,11 @@ export const addNewMessage = (idDialog, idUser, message) => ({
   idDialog,
   idUser,
   message,
+});
+export const addNewChat = (idDialog, idUser) => ({
+  type: NEW_CHAT,
+  idDialog,
+  idUser,
 });
 
 export default messagesReducer;

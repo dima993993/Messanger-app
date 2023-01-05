@@ -41,12 +41,14 @@ const EnterMessege = ({
   idDialog,
   messagesCombine,
   updateDialogs,
+  getListDialogs,
+  sortDialogs,
 }) => {
   return (
     <WrapperMessage>
       <input
-        type='text'
-        placeholder='Enter Message'
+        type="text"
+        placeholder="Enter Message"
         value={messageTextValue}
         onChange={(e) => changeValue(e.target.value)}
         onKeyDown={(e) => {
@@ -55,13 +57,15 @@ const EnterMessege = ({
               addNewMessage(idDialog, idAuthUser, messageTextValue);
               messagesCombine(idDialog);
               updateDialogs(idDialog, messageTextValue, new Date());
+              getListDialogs(idAuthUser);
+              sortDialogs();
               changeValue("");
             }
           }
         }}
       />
       <div
-        className='icon'
+        className="icon"
         onClick={() => {
           if (messageTextValue !== "") {
             addNewMessage(idDialog, idAuthUser, messageTextValue);
@@ -69,7 +73,8 @@ const EnterMessege = ({
             updateDialogs(idDialog, messageTextValue, new Date());
             changeValue("");
           }
-        }}>
+        }}
+      >
         <FontAwesomeIcon icon={faPaperPlane} />
       </div>
     </WrapperMessage>

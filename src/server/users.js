@@ -13,7 +13,7 @@ const users = [
       photo: "https://1x.com/assets/img/pro08.jpg",
       aboutMe: "qwerty qwerty qwerty",
     },
-    chats: [1001, 1002],
+    contactsId: [2, 3],
   },
   {
     idUser: 2,
@@ -30,7 +30,7 @@ const users = [
         "https://play-lh.googleusercontent.com/zg-BpJxDelX2-C6GxWOrdYwmrM8ekYwdHXNo4INck2C66kzDsJRhm3ggz6b-y7EWOQ",
       aboutMe: "lorem lorem lorem lorem lorem lorem",
     },
-    chats: [1001, 1003],
+    contactsId: [1, 5],
   },
   {
     idUser: 3,
@@ -47,7 +47,7 @@ const users = [
       aboutMe:
         "Lorem Lorem Lorem Lorem Lorem Lorem Lorem Lorem Lorem Lorem Lorem Lorem Lorem Lorem Lorem Lorem Lorem Lorem Lorem Lorem Lorem",
     },
-    chats: [1002],
+    contactsId: [1],
   },
   {
     idUser: 4,
@@ -64,7 +64,7 @@ const users = [
         "https://www.paperlessmovement.com/wp-content/uploads/2019/09/o2dvsv2pnhe.jpg",
       aboutMe: "lorem lorem lorem lorem lorem lorem",
     },
-    chats: [],
+    contactsId: [],
   },
   {
     idUser: 5,
@@ -81,7 +81,7 @@ const users = [
         "https://www.biletik.aero/upload/medialibrary/807/807f262b60da392f1e09aa6d33f20a9b.png",
       aboutMe: "lorem lorem lorem lorem lorem lorem",
     },
-    chats: [1003],
+    contactsId: [2],
   },
 ];
 

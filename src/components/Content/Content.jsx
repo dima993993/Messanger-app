@@ -5,7 +5,12 @@ import {
   changeTextValueMessage,
   messagesCombine,
 } from "../../redux/messagesReducer";
-import { chooseCurrentDialog, updateDialogs } from "../../redux/dialogsReducer";
+import {
+  chooseCurrentDialog,
+  getListDialogs,
+  sortDialogs,
+  updateDialogs,
+} from "../../redux/dialogsReducer";
 import EnterMessege from "./EnterMessage";
 import HeaderContent from "./HeaderContent";
 import MessagesContainer from "./Messages/MessagesContainer";
@@ -49,6 +54,8 @@ const ContentComponent = (props) => {
             idDialog={props.currentDialog.idDialog}
             messagesCombine={props.messagesCombine}
             updateDialogs={props.updateDialogs}
+            getListDialogs={props.getListDialogs}
+            sortDialogs={props.sortDialogs}
           />
         </>
       ) : (
@@ -74,4 +81,6 @@ export const Content = connect(mapStateToProps, {
   addNewMessage,
   messagesCombine,
   updateDialogs,
+  getListDialogs,
+  sortDialogs,
 })(ContentComponent);

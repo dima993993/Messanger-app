@@ -38,7 +38,8 @@ const MenuComponent = ({ openMenu, setOpenMenu, ...props }) => {
     <>
       <BodyBgMenu
         openMenu={openMenu}
-        onClick={() => setOpenMenu(false)}></BodyBgMenu>
+        onClick={() => setOpenMenu(false)}
+      ></BodyBgMenu>
       <MenuWrapper openMenu={openMenu}>
         <div>
           <div>
@@ -48,18 +49,24 @@ const MenuComponent = ({ openMenu, setOpenMenu, ...props }) => {
               switchTheme={props.switchTheme}
             />
           </div>
-          <div onClick={() => props.setStateLeftAside("searchUser")}>
-            <MenuItem nameItem='Search User' icon={faSearch} />
+          <div
+            onClick={() => {
+              props.setStateLeftAside("searchUser");
+              setOpenMenu(false);
+            }}
+          >
+            <MenuItem nameItem="Search User" icon={faSearch} />
           </div>
-          <MenuItem nameItem='Settings' icon={faGear} />
+          <MenuItem nameItem="Settings" icon={faGear} />
           <div
             onClick={() => {
               props.logOut();
               props.chooseCurrentDialog(null);
               props.chooseCurrentUser([]);
               setOpenMenu(false);
-            }}>
-            <MenuItem nameItem='Log Out' icon={faArrowRightFromBracket} />
+            }}
+          >
+            <MenuItem nameItem="Log Out" icon={faArrowRightFromBracket} />
           </div>
         </div>
       </MenuWrapper>

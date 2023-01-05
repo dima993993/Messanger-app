@@ -1,6 +1,9 @@
+import { useEffect } from "react";
 import { NavLink } from "react-router-dom";
 import styled from "styled-components";
+import { createDialogId } from "../../../redux/dialogsReducer";
 import UserPhoto from "../../Common/UserPhoto";
+
 const WrapperUser = styled.div`
   & > * {
     text-decoration: none;
@@ -24,19 +27,46 @@ const WrapperUser = styled.div`
   }
 `;
 
-const User = ({ profile, idUser }) => {
+const User = ({
+  user,
+  authUser,
+  addNewDialog,
+  addContactId,
+  setStateLeftAside,
+  addNewChat,
+  currentDialog,
+}) => {
+  let authUserInfo = {
+    firstName: authUser.profile.firstName,
+    lastName: authUser.profile.lastName,
+    photo: authUser.profile.photo,
+  };
+  let userInfo = {
+    firstName: user.profile.firstName,
+    lastName: user.profile.lastName,
+    photo: user.profile.photo,
+  };
   return (
     <WrapperUser>
-      <NavLink to={`/dialog/${idUser}`}>
+      <NavLink
+        to={`/dialog/${user.idUser}`}
+        onClick={() => {
+          addNewDialog(authUser.idUser, authUserInfo, user.idUser, userInfo);
+          addContactId(authUser.idUser, user.idUser);
+          addNewChat(createDialogId, user.idUser);
+          addNewChat(createDialogId, authUser.idUser);
+          setStateLeftAside("dialogs");
+        }}
+      >
         <div>
           <UserPhoto
-            photo={profile.photo}
-            firstName={profile.firstName}
-            lastName={profile.lastName}
+            photo={user.profile.photo}
+            firstName={user.profile.firstName}
+            lastName={user.profile.lastName}
           />
         </div>
-        <div className='name_block'>
-          <div>{profile.firstName + " " + profile.lastName}</div>
+        <div className="name_block">
+          <div>{user.profile.firstName + " " + user.profile.lastName}</div>
         </div>
       </NavLink>
     </WrapperUser>

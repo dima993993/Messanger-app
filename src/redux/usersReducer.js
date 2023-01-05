@@ -3,6 +3,7 @@ import users from "./../server/users";
 const USER_AUTHORIZATION = "USER_AUTHORIZATION";
 const LOG_OUT = "LOG_OUT";
 const CHOOSE_CURRENT_USER = "CHOOSE_CURRENT_USER";
+const ADD_CONTACT_ID = "ADD_CONTACT_ID";
 
 const getAuthUser = localStorage.getItem("authUser");
 const authUser = JSON.parse(getAuthUser);
@@ -41,6 +42,22 @@ const usersReducer = (state = initialState, action) => {
         authorizedUser: [],
       };
     }
+    case ADD_CONTACT_ID:
+      let filterUsers = state.users.filter(
+        (user) => user.idUser === action.authUserId
+      );
+      let userIndex = state.users.findIndex(
+        (user) => user.idUser === action.authUserId
+      );
+      let newContactsId = [...filterUsers[0].contactsId, action.idUser];
+      filterUsers[0].contactsId = newContactsId;
+      let cloneUsers = [...state.users];
+      cloneUsers.splice(userIndex, 1, filterUsers[0]);
+      return {
+        ...state,
+        users: cloneUsers,
+        authorizedUser: filterUsers,
+      };
     default:
       return state;
   }
@@ -58,4 +75,9 @@ export const chooseCurrentUser = (idUser) => ({
   idUser,
 });
 export const logOut = () => ({ type: LOG_OUT });
+export const addContactId = (authUserId, idUser) => ({
+  type: ADD_CONTACT_ID,
+  authUserId,
+  idUser,
+});
 export default usersReducer;

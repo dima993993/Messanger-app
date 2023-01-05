@@ -1,17 +1,19 @@
 import { useEffect, useState } from "react";
 import { connect } from "react-redux";
-import { messagesCombine } from "../../redux/messagesReducer";
+import { addNewChat, messagesCombine } from "../../redux/messagesReducer";
 import {
+  addNewDialog,
   chooseCurrentDialog,
   getListDialogs,
   searchFieldValue,
 } from "../../redux/dialogsReducer";
-import { chooseCurrentUser } from "../../redux/usersReducer";
+import { addContactId, chooseCurrentUser } from "../../redux/usersReducer";
 import DialogsContainer from "./Dialogs/DialogsContainer";
 import HeaderLeftAside from "./HeaderLeftAside";
 import styled from "styled-components";
 import { filterForSearch } from "../../helpers/filterForSearch";
 import UsersContainer from "./Users/UsersContainer";
+import { setStateLeftAside } from "../../redux/supportReducer";
 
 const LeftAsideWrapper = styled.div`
   background-color: var(--color-basic);
@@ -34,11 +36,15 @@ const LeftAsideWrapper = styled.div`
 `;
 
 const LeftAsideComponent = (props) => {
+  let [isLoading, setIsLoading] = useState(true);
   useEffect(() => {
     if (props.authorizedUser.length > 0) {
       props.getListDialogs(props.authorizedUser[0].idUser);
     }
   }, [props.authorizedUser]);
+  useEffect(() => {
+    setIsLoading(true);
+  }, [props.idCurrentDialog]);
   if (props.authorizedUser.length === 0) return null; // Проверка на авторизованного пользователя
   let switchLeftAside = () => {
     switch (props.stateLeftAside) {
@@ -47,21 +53,34 @@ const LeftAsideComponent = (props) => {
           <UsersContainer
             users={filterForSearch(props.users, props.fieldValue, "profile")}
             authorizedUser={props.authorizedUser[0]}
+            addNewDialog={props.addNewDialog}
+            addContactId={props.addContactId}
+            setStateLeftAside={props.setStateLeftAside}
+            addNewChat={props.addNewChat}
+            currentDialog={props.currentDialog}
+            idCurrentDialog={props.idCurrentDialog}
+            setIsLoading={setIsLoading}
           />
         );
       default:
         return (
-          <DialogsContainer
-            authorizedUser={props.authorizedUser}
-            chooseCurrentDialog={props.chooseCurrentDialog}
-            messagesCombine={props.messagesCombine}
-            dialogs={filterForSearch(
-              props.myDialogs,
-              props.fieldValue,
-              "userInfo"
+          <>
+            {isLoading ? (
+              <DialogsContainer
+                authorizedUser={props.authorizedUser}
+                chooseCurrentDialog={props.chooseCurrentDialog}
+                messagesCombine={props.messagesCombine}
+                dialogs={filterForSearch(
+                  props.myDialogs,
+                  props.fieldValue,
+                  "userInfo"
+                )}
+                chooseCurrentUser={props.chooseCurrentUser}
+              />
+            ) : (
+              <div>Empty</div>
             )}
-            chooseCurrentUser={props.chooseCurrentUser}
-          />
+          </>
         );
     }
   };
@@ -73,8 +92,9 @@ const LeftAsideComponent = (props) => {
         fieldValue={props.fieldValue}
         setOpenMenu={props.setOpenMenu}
         setStateLeftAside={props.setStateLeftAside}
+        stateLeftAside={props.stateLeftAside}
       />
-      <div className='left_aside_container'>{switchLeftAside()}</div>
+      <div className="left_aside_container">{switchLeftAside()}</div>
     </LeftAsideWrapper>
   );
 };
@@ -87,6 +107,8 @@ const mapStateToProps = (state) => {
     users: state.usersReducer.users,
     myDialogs: state.dialogsReducer.myDialogs,
     stateLeftAside: state.supportReducer.stateLeftAside,
+    currentDialog: state.dialogsReducer.currentDialog,
+    idCurrentDialog: state.dialogsReducer.idCurrentDialog,
   };
 };
 
@@ -96,4 +118,8 @@ export const LeftAside = connect(mapStateToProps, {
   searchFieldValue,
   chooseCurrentUser,
   getListDialogs,
+  setStateLeftAside,
+  addNewDialog,
+  addContactId,
+  addNewChat,
 })(LeftAsideComponent);

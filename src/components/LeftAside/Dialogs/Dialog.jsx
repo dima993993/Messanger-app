@@ -49,15 +49,17 @@ const Dialog = ({
       : dialog.lastMessage;
 
   return (
-    <DialogWrapper>
+    <DialogWrapper
+      onClick={() => {
+        chooseCurrentDialog(dialog); // Выбираем диалог который  нужно отобразить
+        messagesCombine(dialog.idDialog); // Обьединяем сообщения 2х пользователей в один диалог
+        chooseCurrentUser(dialog.userInfo.idUser); // Отправляем id выбранного юзера
+      }}
+    >
       <NavLink
         to={`/dialog/${dialog.idDialog}`}
         className={(state) => (state.isActive ? "active-link" : "")} // Выделяем активный диалог
-        onClick={() => {
-          chooseCurrentDialog(dialog); // Выбираем диалог который  нужно отобразить
-          messagesCombine(dialog.idDialog); // Обьединяем сообщения 2х пользователей в один диалог
-          chooseCurrentUser(dialog.userInfo.idUser); // Отправляем id выбранного юзера
-        }}>
+      >
         <div>
           <UserPhoto
             photo={userInfo.photo}
@@ -65,11 +67,11 @@ const Dialog = ({
             lastName={userInfo.lastName}
           />
         </div>
-        <div className='name_block'>
+        <div className="name_block">
           <div>{userInfo.firstName + " " + userInfo.lastName}</div>
           <div>{cutLastMessage}</div>
         </div>
-        <div className='date'>{date}</div>
+        <div className="date">{date}</div>
       </NavLink>
     </DialogWrapper>
   );
