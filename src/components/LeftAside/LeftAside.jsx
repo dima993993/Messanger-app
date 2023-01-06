@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useEffect } from "react";
 import { connect } from "react-redux";
 import { addNewChat, messagesCombine } from "../../redux/messagesReducer";
 import {
@@ -70,7 +70,6 @@ const LeftAsideComponent = (props) => {
               "userInfo"
             )}
             chooseCurrentUser={props.chooseCurrentUser}
-            messages={props.messages}
           />
         );
     }
@@ -85,7 +84,7 @@ const LeftAsideComponent = (props) => {
         setStateLeftAside={props.setStateLeftAside}
         stateLeftAside={props.stateLeftAside}
       />
-      <div className="left_aside_container">{switchLeftAside()}</div>
+      <div className='left_aside_container'>{switchLeftAside()}</div>
     </LeftAsideWrapper>
   );
 };
