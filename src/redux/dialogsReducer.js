@@ -45,10 +45,16 @@ const dialogsReducer = (state = initialState, action) => {
         dialogs: cloneDialogs,
       };
     case GET_LIST_DIALOGS:
-      let copyDialogs = JSON.parse(JSON.stringify(state.dialogs));
+      // let copyDialogs = JSON.parse(JSON.stringify(state.dialogs)); // Создание копии с помощью JSON
+      let copyDialogs = state.dialogs.map((dialog) => {
+        return { ...dialog, userInfo: { ...dialog.userInfo } };
+      }); // Создание копии с помощью перебора
       let filterDialogs = copyDialogs.filter((dialog) => {
+        // Удаляем авторизованного пользователя из обьекта пользователей
         delete dialog.userInfo[action.authUserId];
+        // Получаем id не авторизованного пользователя
         let obj = Object.keys(dialog.userInfo);
+        // Если пользователей больше одного то диалог не относиться к авторизованному пользователю
         if (obj.length === 1) {
           dialog.userInfo = dialog.userInfo[obj[0]];
           dialog.userInfo.idUser = +obj[0];
@@ -73,7 +79,8 @@ const dialogsReducer = (state = initialState, action) => {
         dialogs: [...state.dialogs, newDialog],
       };
     case SORT_DIALOGS:
-      let sortDialogs = [...state.myDialogs].sort((a, b) => b.date - a.date);
+      // Сортировка срабатывает после отправки сообщения перемещаяя диалог на самый верх
+      let sortDialogs = state.myDialogs.sort((a, b) => b.date - a.date);
       return {
         ...state,
         myDialogs: sortDialogs,

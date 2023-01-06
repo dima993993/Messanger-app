@@ -1,8 +1,7 @@
-import { useEffect } from "react";
 import { NavLink } from "react-router-dom";
-import styled from "styled-components";
 import { createDialogId } from "../../../redux/dialogsReducer";
 import UserPhoto from "../../Common/UserPhoto";
+import styled from "styled-components";
 
 const WrapperUser = styled.div`
   & > * {
@@ -34,7 +33,6 @@ const User = ({
   addContactId,
   setStateLeftAside,
   addNewChat,
-  currentDialog,
 }) => {
   let authUserInfo = {
     firstName: authUser.profile.firstName,
@@ -51,6 +49,7 @@ const User = ({
       <NavLink
         to={`/dialog/${user.idUser}`}
         onClick={() => {
+          // Создаем новый диалог на основе авторизованного пользователя
           addNewDialog(authUser.idUser, authUserInfo, user.idUser, userInfo);
           addContactId(authUser.idUser, user.idUser);
           addNewChat(createDialogId, user.idUser);

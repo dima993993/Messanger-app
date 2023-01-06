@@ -12,15 +12,13 @@ const DialogsContainer = ({
     <WrapperDialogsContainer>
       <div>
         {dialogs.map((dialog, index) => {
-          let getDate = dialog.date.split("T");
-          let time = getDate[1].split(":");
           return (
             <Dialog
               key={index}
               dialog={dialog}
               chooseCurrentDialog={chooseCurrentDialog}
               userInfo={dialog.userInfo}
-              date={time[0] + ":" + time[1]}
+              date={dialog.date.getHours() + ":" + dialog.date.getMinutes()}
               messagesCombine={messagesCombine}
               chooseCurrentUser={chooseCurrentUser}
               authUserId={authorizedUser.idUser}

@@ -11,7 +11,6 @@ const UsersContainer = ({
   addNewChat,
   currentDialog,
   idCurrentDialog,
-  setIsLoading,
 }) => {
   return (
     <WrapperUsersContainer>
@@ -28,7 +27,6 @@ const UsersContainer = ({
               addNewChat={addNewChat}
               currentDialog={currentDialog}
               idCurrentDialog={idCurrentDialog}
-              setIsLoading={setIsLoading}
             />
           ) : null}
         </div>

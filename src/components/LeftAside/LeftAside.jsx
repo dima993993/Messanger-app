@@ -36,15 +36,12 @@ const LeftAsideWrapper = styled.div`
 `;
 
 const LeftAsideComponent = (props) => {
-  let [isLoading, setIsLoading] = useState(true);
   useEffect(() => {
     if (props.authorizedUser.length > 0) {
       props.getListDialogs(props.authorizedUser[0].idUser);
     }
   }, [props.authorizedUser]);
-  useEffect(() => {
-    setIsLoading(true);
-  }, [props.idCurrentDialog]);
+
   if (props.authorizedUser.length === 0) return null; // Проверка на авторизованного пользователя
   let switchLeftAside = () => {
     switch (props.stateLeftAside) {
@@ -59,28 +56,21 @@ const LeftAsideComponent = (props) => {
             addNewChat={props.addNewChat}
             currentDialog={props.currentDialog}
             idCurrentDialog={props.idCurrentDialog}
-            setIsLoading={setIsLoading}
           />
         );
       default:
         return (
-          <>
-            {isLoading ? (
-              <DialogsContainer
-                authorizedUser={props.authorizedUser}
-                chooseCurrentDialog={props.chooseCurrentDialog}
-                messagesCombine={props.messagesCombine}
-                dialogs={filterForSearch(
-                  props.myDialogs,
-                  props.fieldValue,
-                  "userInfo"
-                )}
-                chooseCurrentUser={props.chooseCurrentUser}
-              />
-            ) : (
-              <div>Empty</div>
+          <DialogsContainer
+            authorizedUser={props.authorizedUser}
+            chooseCurrentDialog={props.chooseCurrentDialog}
+            messagesCombine={props.messagesCombine}
+            dialogs={filterForSearch(
+              props.myDialogs,
+              props.fieldValue,
+              "userInfo"
             )}
-          </>
+            chooseCurrentUser={props.chooseCurrentUser}
+          />
         );
     }
   };
@@ -108,7 +98,6 @@ const mapStateToProps = (state) => {
     myDialogs: state.dialogsReducer.myDialogs,
     stateLeftAside: state.supportReducer.stateLeftAside,
     currentDialog: state.dialogsReducer.currentDialog,
-    idCurrentDialog: state.dialogsReducer.idCurrentDialog,
   };
 };
 
