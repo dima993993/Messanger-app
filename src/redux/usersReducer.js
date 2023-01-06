@@ -43,34 +43,34 @@ const usersReducer = (state = initialState, action) => {
       };
     }
     case ADD_CONTACT_ID:
-      let filterAuthUsers = state.users.filter(
-        (user) => user.idUser === action.authUserId
-      );
-      let authUserIndex = state.users.findIndex(
-        (user) => user.idUser === action.authUserId
-      );
-      let newContactsIdAuthUser = [
-        ...filterAuthUsers[0].contactsId,
-        action.idUser,
-      ];
-      filterAuthUsers[0].contactsId = newContactsIdAuthUser;
+      // let filterAuthUsers = state.users.filter(
+      //   (user) => user.idUser === action.authUserId
+      // );
+      // let authUserIndex = state.users.findIndex(
+      //   (user) => user.idUser === action.authUserId
+      // );
+      // let newContactsIdAuthUser = [
+      //   ...filterAuthUsers[0].contactsId,
+      //   action.idUser,
+      // ];
+      // filterAuthUsers[0].contactsId = newContactsIdAuthUser;
 
       let filterUsers = state.users.filter(
-        (user) => user.idUser === action.idUser
+        (user) => user.idUser === action.authUserId
       );
       let userIndex = state.users.findIndex(
-        (user) => user.idUser === action.idUser
+        (user) => user.idUser === action.authUserId
       );
-      let newContactsId = [...filterUsers[0].contactsId, action.authUserId];
+      let newContactsId = [...filterUsers[0].contactsId, action.idUser];
       filterUsers[0].contactsId = newContactsId;
 
       let cloneUsers = [...state.users];
-      cloneUsers.splice(authUserIndex, 1, filterAuthUsers[0]);
+      // cloneUsers.splice(authUserIndex, 1, filterAuthUsers[0]);
       cloneUsers.splice(userIndex, 1, filterUsers[0]);
       return {
         ...state,
         users: cloneUsers,
-        authorizedUser: filterAuthUsers,
+        authorizedUser: filterUsers,
       };
     default:
       return state;

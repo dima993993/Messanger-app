@@ -70,6 +70,7 @@ const LeftAsideComponent = (props) => {
               "userInfo"
             )}
             chooseCurrentUser={props.chooseCurrentUser}
+            messages={props.messages}
           />
         );
     }

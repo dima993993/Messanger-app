@@ -47,13 +47,16 @@ const User = ({
   return (
     <WrapperUser>
       <NavLink
-        to={`/dialog/${user.idUser}`}
+        to={`/dialog/${createDialogId}`}
         onClick={() => {
           // Создаем новый диалог на основе авторизованного пользователя
           addNewDialog(authUser.idUser, authUserInfo, user.idUser, userInfo);
+          // Добавляем связь между пользователями
           addContactId(authUser.idUser, user.idUser);
-          addNewChat(createDialogId, user.idUser);
+          // Создаем чаты для авторизованного пользователя
           addNewChat(createDialogId, authUser.idUser);
+          addNewChat(createDialogId, user.idUser);
+          // Переключаемся на диалоги
           setStateLeftAside("dialogs");
         }}
       >

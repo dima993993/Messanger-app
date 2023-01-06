@@ -44,11 +44,11 @@ const Field = ({ type, name, nameField, placeholder, allSettings }) => {
 
   return (
     <WrapperField>
-      <div className='name_field'>{nameField}</div>
-      <div className='error'>
+      <div className="name_field">{nameField}</div>
+      <div className="error">
         {allSettings.isDirty && changeError(nameField)}
       </div>
-      <div className='block_field'>
+      <div className="block_field">
         <input
           name={name}
           type={type}
@@ -56,6 +56,7 @@ const Field = ({ type, name, nameField, placeholder, allSettings }) => {
           value={allSettings.value}
           onBlur={(e) => allSettings.onBlur(e)}
           onChange={(e) => allSettings.onChange(e)}
+          autoComplete="off"
         />
         <div></div>
       </div>

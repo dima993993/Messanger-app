@@ -1,6 +1,7 @@
 import { useRef } from "react";
 import { connect } from "react-redux";
 import {
+  addNewChat,
   addNewMessage,
   changeTextValueMessage,
   messagesCombine,
@@ -15,7 +16,6 @@ import EnterMessege from "./EnterMessage";
 import HeaderContent from "./HeaderContent";
 import MessagesContainer from "./Messages/MessagesContainer";
 import styled from "styled-components";
-
 const ContentWrapper = styled.div`
   background-color: var(--color-aditional);
   width: 100%;
@@ -83,4 +83,5 @@ export const Content = connect(mapStateToProps, {
   updateDialogs,
   getListDialogs,
   sortDialogs,
+  addNewChat,
 })(ContentComponent);
