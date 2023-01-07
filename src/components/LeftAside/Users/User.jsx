@@ -38,11 +38,13 @@ const User = ({
     firstName: authUser.profile.firstName,
     lastName: authUser.profile.lastName,
     photo: authUser.profile.photo,
+    newMessage: false,
   };
   let userInfo = {
     firstName: user.profile.firstName,
     lastName: user.profile.lastName,
     photo: user.profile.photo,
+    newMessage: false,
   };
   return (
     <WrapperUser>
@@ -58,8 +60,7 @@ const User = ({
           addNewChat(createDialogId, user.idUser);
           // Переключаемся на диалоги
           setStateLeftAside("dialogs");
-        }}
-      >
+        }}>
         <div>
           <UserPhoto
             photo={user.profile.photo}
@@ -67,7 +68,7 @@ const User = ({
             lastName={user.profile.lastName}
           />
         </div>
-        <div className="name_block">
+        <div className='name_block'>
           <div>{user.profile.firstName + " " + user.profile.lastName}</div>
         </div>
       </NavLink>

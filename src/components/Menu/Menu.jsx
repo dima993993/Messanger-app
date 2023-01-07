@@ -1,15 +1,15 @@
 import { connect } from "react-redux";
+import { setStateLeftAside, switchTheme } from "../../redux/supportReducer";
+import { chooseCurrentUser, logOut } from "../../redux/usersReducer";
+import { chooseCurrentDialog } from "../../redux/dialogsReducer";
 import {
   faGear,
   faSearch,
   faArrowRightFromBracket,
 } from "@fortawesome/free-solid-svg-icons";
 import MenuItem from "./MenuItem";
-import styled from "styled-components";
 import MenuHeader from "./MenuHeader";
-import { setStateLeftAside, switchTheme } from "../../redux/supportReducer";
-import { chooseCurrentUser, logOut } from "../../redux/usersReducer";
-import { chooseCurrentDialog } from "../../redux/dialogsReducer";
+import styled from "styled-components";
 
 const MenuWrapper = styled.div`
   width: var(--width-aside);
@@ -38,8 +38,7 @@ const MenuComponent = ({ openMenu, setOpenMenu, ...props }) => {
     <>
       <BodyBgMenu
         openMenu={openMenu}
-        onClick={() => setOpenMenu(false)}
-      ></BodyBgMenu>
+        onClick={() => setOpenMenu(false)}></BodyBgMenu>
       <MenuWrapper openMenu={openMenu}>
         <div>
           <div>
@@ -53,20 +52,18 @@ const MenuComponent = ({ openMenu, setOpenMenu, ...props }) => {
             onClick={() => {
               props.setStateLeftAside("searchUser");
               setOpenMenu(false);
-            }}
-          >
-            <MenuItem nameItem="Search User" icon={faSearch} />
+            }}>
+            <MenuItem nameItem='Search User' icon={faSearch} />
           </div>
-          <MenuItem nameItem="Settings" icon={faGear} />
+          <MenuItem nameItem='Settings' icon={faGear} />
           <div
             onClick={() => {
               props.logOut();
               props.chooseCurrentDialog(null);
               props.chooseCurrentUser([]);
               setOpenMenu(false);
-            }}
-          >
-            <MenuItem nameItem="Log Out" icon={faArrowRightFromBracket} />
+            }}>
+            <MenuItem nameItem='Log Out' icon={faArrowRightFromBracket} />
           </div>
         </div>
       </MenuWrapper>

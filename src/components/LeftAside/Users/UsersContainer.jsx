@@ -1,5 +1,5 @@
-import styled from "styled-components";
 import User from "./User";
+import styled from "styled-components";
 
 const WrapperUsersContainer = styled.div``;
 const UsersContainer = ({

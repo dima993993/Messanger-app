@@ -8,12 +8,12 @@ import {
   searchFieldValue,
 } from "../../redux/dialogsReducer";
 import { addContactId, chooseCurrentUser } from "../../redux/usersReducer";
+import { setStateLeftAside } from "../../redux/supportReducer";
+import { filterForSearch } from "../../helpers/filterForSearch";
 import DialogsContainer from "./Dialogs/DialogsContainer";
 import HeaderLeftAside from "./HeaderLeftAside";
-import styled from "styled-components";
-import { filterForSearch } from "../../helpers/filterForSearch";
 import UsersContainer from "./Users/UsersContainer";
-import { setStateLeftAside } from "../../redux/supportReducer";
+import styled from "styled-components";
 
 const LeftAsideWrapper = styled.div`
   background-color: var(--color-basic);

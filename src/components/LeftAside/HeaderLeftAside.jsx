@@ -1,7 +1,7 @@
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faArrowLeft, faBars } from "@fortawesome/free-solid-svg-icons";
-import styled from "styled-components";
 import Search from "../Common/Search";
+import styled from "styled-components";
 
 const WrapperLeftAsideHeader = styled.div`
   height: var(--height-header);

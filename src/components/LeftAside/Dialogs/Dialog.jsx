@@ -14,6 +14,7 @@ const DialogWrapper = styled.div`
     font-size: var(--fs-sm);
     border-radius: var(--radius-sm);
     transition: var(--tr-fast);
+    position: relative;
     &:hover:not(.active-link) {
       background-color: var(--color-aditional);
     }
@@ -32,6 +33,33 @@ const DialogWrapper = styled.div`
     }
   }
 `;
+const WrapperDialogItem = styled.div`
+  width: 15px;
+  height: 15px;
+  background-color: var(--color-your-messege);
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: absolute;
+  bottom: 5px;
+  right: 10px;
+  & > div {
+    padding: 2px;
+    font-size: 8px;
+    font-weight: bold;
+  }
+`;
+
+const DialogItem = () => {
+  return (
+    <WrapperDialogItem>
+      <div>
+        <span>1</span>
+      </div>
+    </WrapperDialogItem>
+  );
+};
 
 const Dialog = ({
   dialog,
@@ -54,8 +82,7 @@ const Dialog = ({
         chooseCurrentDialog(dialog); // Выбираем диалог который  нужно отобразить
         messagesCombine(dialog.idDialog); // Обьединяем сообщения 2х пользователей в один диалог
         chooseCurrentUser(dialog.userInfo.idUser); // Отправляем id выбранного юзера
-      }}
-    >
+      }}>
       <NavLink
         to={`/dialog/${dialog.idDialog}`}
         className={(state) => (state.isActive ? "active-link" : "")} // Выделяем активный диалог
@@ -67,11 +94,12 @@ const Dialog = ({
             lastName={userInfo.lastName}
           />
         </div>
-        <div className="name_block">
+        <div className='name_block'>
           <div>{userInfo.firstName + " " + userInfo.lastName}</div>
           <div>{cutLastMessage}</div>
         </div>
-        <div className="date">{date}</div>
+        <div className='date'>{date}</div>
+        {dialog.userInfo.newMessage ? <DialogItem /> : null}
       </NavLink>
     </DialogWrapper>
   );

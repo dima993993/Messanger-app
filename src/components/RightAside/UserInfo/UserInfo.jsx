@@ -1,11 +1,11 @@
 import PhotoBlock from "./PhotoBlock";
 import UserInfoItem from "./UserInfoItem";
-import styled from "styled-components";
 import {
   faPhone,
   faCircleInfo,
   faSignature,
 } from "@fortawesome/free-solid-svg-icons";
+import styled from "styled-components";
 const WrapperUserInfo = styled.div``;
 const UserInfo = ({ profile }) => {
   return (

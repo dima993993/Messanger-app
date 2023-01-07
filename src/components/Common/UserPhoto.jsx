@@ -9,8 +9,14 @@ const WrapperUserPhoto = styled.div`
   align-items: center;
   overflow: hidden;
   border-radius: 50%;
-  img {
+  .image {
     width: 100%;
+    height: 100%;
+    background-image: ${(props) =>
+      props.photo !== "" ? `url(${props.photo})` : ""};
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position: center;
   }
   .no_photo {
     width: 100%;
@@ -25,9 +31,9 @@ const WrapperUserPhoto = styled.div`
 
 const UserPhoto = ({ photo, firstName, lastName }) => {
   return (
-    <WrapperUserPhoto>
+    <WrapperUserPhoto photo={photo}>
       {photo ? (
-        <img src={photo} alt={firstName + " " + lastName} />
+        <div className='image'></div>
       ) : (
         <div className='no_photo'>
           <span>{firstName[0] + lastName[0]}</span>

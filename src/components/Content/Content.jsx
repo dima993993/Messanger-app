@@ -16,6 +16,7 @@ import EnterMessege from "./EnterMessage";
 import HeaderContent from "./HeaderContent";
 import MessagesContainer from "./Messages/MessagesContainer";
 import styled from "styled-components";
+
 const ContentWrapper = styled.div`
   background-color: var(--color-aditional);
   width: 100%;

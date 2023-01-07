@@ -43,18 +43,6 @@ const usersReducer = (state = initialState, action) => {
       };
     }
     case ADD_CONTACT_ID:
-      // let filterAuthUsers = state.users.filter(
-      //   (user) => user.idUser === action.authUserId
-      // );
-      // let authUserIndex = state.users.findIndex(
-      //   (user) => user.idUser === action.authUserId
-      // );
-      // let newContactsIdAuthUser = [
-      //   ...filterAuthUsers[0].contactsId,
-      //   action.idUser,
-      // ];
-      // filterAuthUsers[0].contactsId = newContactsIdAuthUser;
-
       let filterUsers = state.users.filter(
         (user) => user.idUser === action.authUserId
       );

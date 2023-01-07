@@ -6,6 +6,7 @@ const UPDATE_DIALOG = "UPDATE_DIALOG";
 const GET_LIST_DIALOGS = "GET_LIST_DIALOGS";
 const ADD_NEW_DIALOG = "ADD_NEW_DIALOG";
 const SORT_DIALOGS = "SORT_DIALOGS";
+const ALERT_NEW_MESSAGE = "ALERT_NEW_MESSAGE";
 
 export let createDialogId = 3000;
 
@@ -45,7 +46,6 @@ const dialogsReducer = (state = initialState, action) => {
         dialogs: cloneDialogs,
       };
     case GET_LIST_DIALOGS:
-      // let copyDialogs = JSON.parse(JSON.stringify(state.dialogs)); // Создание копии с помощью JSON
       let copyDialogs = state.dialogs.map((dialog) => {
         return { ...dialog, userInfo: { ...dialog.userInfo } };
       }); // Создание копии с помощью перебора
@@ -81,8 +81,10 @@ const dialogsReducer = (state = initialState, action) => {
     case SORT_DIALOGS:
       // Сортировка срабатывает после отправки сообщения перемещаяя диалог на самый верх
       let sortDialogs = state.myDialogs.sort((a, b) => b.date - a.date);
+      let sortAllDialogs = state.dialogs.sort((a, b) => b.date - a.date);
       return {
         ...state,
+        diaogs: sortAllDialogs,
         myDialogs: sortDialogs,
       };
     default:

@@ -83,6 +83,23 @@ const users = [
     },
     contactsId: [2],
   },
+  {
+    idUser: 6,
+    authorization: {
+      login: "1",
+      password: "1",
+    },
+    profile: {
+      firstName: "Vasya",
+      lastName: "Pupkin",
+      nicName: "",
+      phone: "+380992345111",
+      photo:
+        "https://i0.wp.com/dmtalkies.com/wp-content/uploads/2022/10/Netflix-German-Film-Old-People-Ending-Explained.jpg?fit=1200%2C662&ssl=1",
+      aboutMe: "",
+    },
+    contactsId: [],
+  },
 ];
 
 export default users;

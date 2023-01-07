@@ -1,5 +1,5 @@
-import { faPaperPlane } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faPaperPlane } from "@fortawesome/free-solid-svg-icons";
 import styled from "styled-components";
 
 const WrapperMessage = styled.div`
@@ -44,37 +44,26 @@ const EnterMessege = ({
   getListDialogs,
   sortDialogs,
 }) => {
+  let sendMessage = () => {
+    if (messageTextValue !== "") {
+      addNewMessage(idDialog, idAuthUser, messageTextValue);
+      messagesCombine(idDialog);
+      updateDialogs(idDialog, messageTextValue, new Date());
+      getListDialogs(idAuthUser);
+      sortDialogs();
+      changeValue("");
+    }
+  };
   return (
     <WrapperMessage>
       <input
-        type="text"
-        placeholder="Enter Message"
+        type='text'
+        placeholder='Enter Message'
         value={messageTextValue}
         onChange={(e) => changeValue(e.target.value)}
-        onKeyDown={(e) => {
-          if (e.key === "Enter") {
-            if (messageTextValue !== "") {
-              addNewMessage(idDialog, idAuthUser, messageTextValue);
-              messagesCombine(idDialog);
-              updateDialogs(idDialog, messageTextValue, new Date());
-              getListDialogs(idAuthUser);
-              sortDialogs();
-              changeValue("");
-            }
-          }
-        }}
+        onKeyDown={(e) => (e.key === "Enter" ? sendMessage() : null)}
       />
-      <div
-        className="icon"
-        onClick={() => {
-          if (messageTextValue !== "") {
-            addNewMessage(idDialog, idAuthUser, messageTextValue);
-            messagesCombine(idDialog);
-            updateDialogs(idDialog, messageTextValue, new Date());
-            changeValue("");
-          }
-        }}
-      >
+      <div className='icon' onClick={() => sendMessage()}>
         <FontAwesomeIcon icon={faPaperPlane} />
       </div>
     </WrapperMessage>

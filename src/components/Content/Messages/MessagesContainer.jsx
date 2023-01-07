@@ -1,5 +1,5 @@
-import styled from "styled-components";
 import Message from "./Message";
+import styled from "styled-components";
 
 const MessagesContainerWrapper = styled.div`
   width: 100%;
